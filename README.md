@@ -19,6 +19,8 @@ This mean if your code has `==`, it should be `===`
 2. Edit a your vscode `config.json`s' `devavatar.ruleFile` to `rule.json`
 3. Run by `F1` + `Run DevAvatar`
 
+* (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
+
 ## Extension Settings
 
 Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
@@ -41,7 +43,3 @@ This package is made based on
 
 We would like to thank the Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation.
 This system was supported by JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
-
-## License
-
-[MIT](LICENSE) © 2019 Yuki Ueda <ueda.yuki.un7@is.naist.jp> (ikuyadeu.github.io)
