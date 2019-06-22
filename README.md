@@ -1,20 +1,23 @@
-# devavatar README
+# Devavatar for Visual Studio Code
 
-This is the README for your extension "devavatar". After writing up a brief description, we recommend including the following sections.
+A Visual Studio Code extension with support devreplay thas will suggest source code fix based on rule file.
+It is from [devreplay](https://github.com/Ikuyadeu/devreplay)
 
-## Features
+## Quick start
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+1. Create your own programming style(`./rule.json`) on the root like bellow
+```json
+[
+ {
+    "code": [
+     "* == --> ==="
+    ]
+ }
+]
+```
+This mean if your code has `==`, it should be `===`
+2. Edit a your vscode `config.json`s' `devavatar.ruleFile` to `rule.json`
+3. Run by `F1` + `Run DevAvatar`
 
 ## Extension Settings
 
@@ -24,42 +27,21 @@ For example:
 
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+* `devavatar.ruleFile`: Programming style rule File for this extension
 
-## Known Issues
+## Supported Language
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+* TypeScript
 
-## Release Notes
+## Thanks
 
-Users appreciate release notes as you update your extension.
+This package is made based on
+* [vscode-python](https://github.com/Microsoft/vscode-python/blob/master/src/client/language/tokenizer.ts)
+* [vscode-textmate](https://github.com/microsoft/vscode-textmate)
 
-### 1.0.0
+We would like to thank the Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation.
+This system was supported by JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
 
-Initial release of ...
+## License
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT](LICENSE) © 2019 Yuki Ueda <ueda.yuki.un7@is.naist.jp> (ikuyadeu.github.io)
