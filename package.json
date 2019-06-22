@@ -1,13 +1,14 @@
 {
 	"name": "devavatar",
 	"displayName": "devavatar",
-	"description": "Fix your source code by your style",
-	"version": "0.0.2",
+	"description": "Devavatar for Visual Studio Code",
+	"version": "0.0.3",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
     "icon": "img/icon.png",
     "license": "SEE LICENSE IN LICENSE",
     "galleryBanner": {
+		"color": "#444444",
         "theme": "dark"
 	},
 	"keywords": [

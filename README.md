@@ -2,6 +2,7 @@
 
 A Visual Studio Code extension with support devreplay thas will suggest source code fix based on rule file.
 It is from [devreplay](https://github.com/Ikuyadeu/devreplay)
+GitHub bot version is [here](https://github.com/apps/dev-avatar)
 
 ## Quick start
 
