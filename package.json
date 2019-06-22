@@ -1,0 +1,66 @@
+{
+	"name": "devavatar",
+	"displayName": "devavatar",
+	"description": "Fix your source code by your style",
+	"version": "0.0.1",
+	"author": "Yuki Ueda",
+	"publisher": "Ikuyadeu",
+    "icon": "img/icon.png",
+    "license": "SEE LICENSE IN LICENSE",
+    "galleryBanner": {
+        "color": "#00ffff",
+        "theme": "dark"
+    },
+    "repository": {
+		"type": "git",
+        "url": "https://github.com/Ikuyadeu/vscode-devavatar"
+    },
+    "bugs": {
+        "url": "https://github.com/Ikuyadeu/vscode-devavatar/issues"
+    },
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"categories": [
+		"Other",
+		"Linters"
+	],
+	"activationEvents": [
+		"onCommand:devavatar.run"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [{
+			"command": "devavatar.run",
+			"title": "Run DevAvatar"
+		}],
+		"configuration":[
+			{
+				"title": "devavatar",
+				"properties": {
+					"devavatar.ruleFile": {
+						"type": "string",
+						"description": "The path to the devavatar rules file"
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
+	},
+	"dependencies": {
+		"devreplay":"^0.0.17"
+	},
+	"devDependencies": {
+		"typescript": "^3.5.2",
+		"vscode": "^1.1.34",
+		"tslint": "^5.17.0",
+		"@types/node": "^12.0.8",
+		"@types/mocha": "^5.2.7"
+	}
+}
