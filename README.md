@@ -1,12 +1,12 @@
 # Devavatar for Visual Studio Code
 
 A Visual Studio Code extension with support devreplay thas will suggest source code fix based on rule file.
-It is from [devreplay](https://github.com/Ikuyadeu/devreplay)
+It is from [devreplay](https://www.npmjs.com/package/devreplay)
 GitHub bot version is [here](https://github.com/apps/dev-avatar)
 
 ## Quick start
 
-1. Create your own programming style(`./rule.json`) on the root like bellow
+1. Create your own programming style(`./devavatar.json`) on the root like bellow
 ```json
 [
  {
@@ -17,7 +17,8 @@ GitHub bot version is [here](https://github.com/apps/dev-avatar)
 ]
 ```
 This mean if your code has `==`, it should be `===`
-2. Edit a your vscode `config.json`s' `devavatar.ruleFile` to `rule.json`
+
+2. Edit a your vscode settings' `devavatar.ruleFile` to `devavatar.json`
 3. Run by `F1` + `Run DevAvatar`
 
 * (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
