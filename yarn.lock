@@ -205,10 +205,10 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-devreplay@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/devreplay/-/devreplay-0.0.17.tgz#40b91df0bc90f4e3acddf7c3c86f70df69d74d90"
-  integrity sha512-9iKEH6RgkeNNZggAeLXTQ2rdA05h5bhHs4n0C1vp8jNZBEcgLi4ze9amPBjZYygZrqaKyLaBpvK5SRP2D3IeHw==
+devreplay@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/devreplay/-/devreplay-0.1.0.tgz#9565e57be4657ded93c915533660e6dd2ccd4baf"
+  integrity sha512-oGLSSvzsy8itjII288tQWczutVV0J5dg5cnJq3J+F26FYmEohDqGcGmN6wxJhmwcJVRmcAJVFRn36miw+639XQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     builtin-modules "^3.1.0"

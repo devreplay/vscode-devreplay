@@ -1,8 +1,8 @@
 {
-	"name": "devavatar",
-	"displayName": "Devavatar",
-	"description": "Devavatar for Visual Studio Code",
-	"version": "0.0.3",
+	"name": "devreplay",
+	"displayName": "Devreplay",
+	"description": "Devreplay for Visual Studio Code",
+	"version": "0.0.4",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
     "icon": "img/icon.png",
@@ -13,14 +13,14 @@
 	},
 	"keywords": [
 		"Coding Style",
-		"Devavatar"
+		"Devreplay"
 	],
     "repository": {
 		"type": "git",
-        "url": "https://github.com/Ikuyadeu/vscode-devavatar"
+        "url": "https://github.com/Ikuyadeu/vscode-devreplay"
     },
     "bugs": {
-        "url": "https://github.com/Ikuyadeu/vscode-devavatar/issues"
+        "url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
     },
 	"engines": {
 		"vscode": "^1.33.0"
@@ -30,21 +30,22 @@
 		"Linters"
 	],
 	"activationEvents": [
-		"onCommand:devavatar.run"
+		"onCommand:devreplay.run"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [{
-			"command": "devavatar.run",
-			"title": "Run DevAvatar"
+			"command": "devreplay.run",
+			"title": "Run DevReplay"
 		}],
 		"configuration":[
 			{
-				"title": "devavatar",
+				"title": "devreplay",
 				"properties": {
-					"devavatar.ruleFile": {
+					"devreplay.ruleFile": {
 						"type": "string",
-						"description": "The path to the devavatar rules file"
+						"default": "devreplay.json",
+						"description": "The absolute path to the devreplay rules file"
 					}
 				}
 			}
@@ -58,7 +59,7 @@
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
-		"devreplay":"^0.0.17"
+		"devreplay":"^0.1.0"
 	},
 	"devDependencies": {
 		"typescript": "^3.5.2",

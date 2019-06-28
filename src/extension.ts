@@ -4,11 +4,11 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { exec } from 'child_process';
 
-const diagnostics = languages.createDiagnosticCollection("DevAvatar");
-const config = workspace.getConfiguration("devavatar");
+const diagnostics = languages.createDiagnosticCollection("devreplay");
+const config = workspace.getConfiguration("devreplay");
 
 export function activate(context: ExtensionContext) {
-	let disposable = commands.registerCommand('devavatar.run', lintFile);
+	let disposable = commands.registerCommand('devreplay.run', lintFile);
 
 	context.subscriptions.push(disposable);
 }
@@ -47,14 +47,14 @@ async function createDefaultRule() {
 	let folders = workspace.workspaceFolders;
 	let folder: WorkspaceFolder | undefined = undefined;
 	if (!folders) {
-		window.showErrorMessage('A Devavatar file can only be generated if VS Code is opened on a folder.');
+		window.showErrorMessage('A Devreplay file can only be generated if VS Code is opened on a folder.');
 		return;
 	}
 	if (folders.length === 1) {
 		folder = folders[0];
 	} else {
 		const options: WorkspaceFolderPickOptions = {
-			placeHolder: "Select the folder for generating the 'devavatar.json' file"
+			placeHolder: "Select the folder for generating the 'devreplay.json' file"
 		};
 		folder = await window.showWorkspaceFolderPick(options);
 		if (!folder) {
@@ -62,7 +62,7 @@ async function createDefaultRule() {
 		}
 	}
 	const folderPath = folder.uri.fsPath;
-	const devreplayRuleFile = path.join(folderPath, 'devavatar.json');
+	const devreplayRuleFile = path.join(folderPath, 'devreplay.json');
 
 	if (fs.existsSync(devreplayRuleFile)) {
 		window.showInformationMessage('A TSLint configuration file already exists.');
@@ -77,7 +77,7 @@ async function createDefaultRule() {
 				let document = await workspace.openTextDocument(devreplayRuleFile);
 				window.showTextDocument(document);
 			} else {
-				window.showErrorMessage('Could not run `devavatar` to generate a configuration file. Please verify that you have `tslint` and `typescript` installed.');
+				window.showErrorMessage('Could not run `devreplay` to generate a configuration file. Please verify that you have `tslint` and `typescript` installed.');
 			}
 		});
 	}
