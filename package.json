@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "Devreplay",
 	"description": "Devreplay for Visual Studio Code",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
     "icon": "img/icon.png",
@@ -30,13 +30,18 @@
 		"Linters"
 	],
 	"activationEvents": [
-		"onCommand:devreplay.run"
+		"onCommand:devreplay.run",
+		"onCommand:devreplay.fix"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [{
 			"command": "devreplay.run",
 			"title": "Run DevReplay"
+		},
+		{
+			"command": "devreplay.fix",
+			"title": "Fix by DevReplay"
 		}],
 		"configuration":[
 			{
@@ -59,7 +64,7 @@
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
-		"devreplay":"^0.1.0"
+		"devreplay":"^0.1.2"
 	},
 	"devDependencies": {
 		"typescript": "^3.5.2",

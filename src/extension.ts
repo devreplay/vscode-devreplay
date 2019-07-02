@@ -1,5 +1,5 @@
 import { Position, Range, window, ExtensionContext, commands, languages, DiagnosticSeverity, Diagnostic,Uri,workspace,WorkspaceFolder,WorkspaceFolderPickOptions } from "vscode";
-import { lint } from "devreplay";
+import { lint, lintAndFix } from "devreplay";
 import * as path from 'path';
 import * as fs from 'fs';
 import { exec } from 'child_process';
@@ -8,9 +8,10 @@ const diagnostics = languages.createDiagnosticCollection("devreplay");
 const config = workspace.getConfiguration("devreplay");
 
 export function activate(context: ExtensionContext) {
-	let disposable = commands.registerCommand('devreplay.run', lintFile);
-
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(
+		commands.registerCommand('devreplay.run', lintFile),
+		commands.registerCommand('devreplay.fix', fix),
+	);
 }
 
 async function lintFile() {
@@ -41,6 +42,19 @@ async function lintFile() {
 		diagnostics.set(Uri.file(result.fileName),
 		diagsCollection[result.fileName]);
 	}
+}
+
+async function fix() {
+	const currentDocument = window.activeTextEditor;
+	if (currentDocument===undefined){
+		return;
+	}
+	const fileContent = currentDocument.document.getText();
+	const fileName = currentDocument.document.fileName;
+	const ruleFile:string|undefined = config.get("ruleFile");
+
+	const newContent = await lintAndFix(fileName, ruleFile);
+	fs.writeFileSync(fileName, newContent);
 }
 
 async function createDefaultRule() {

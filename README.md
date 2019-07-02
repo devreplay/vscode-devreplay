@@ -19,7 +19,7 @@ GitHub bot version is [here](https://github.com/apps/dev-avatar)
 This mean if your code has `==`, it should be `===`
 
 2. Edit a your vscode settings' `devreplay.ruleFile` to `devreplay.json`
-3. Run by `F1` + `Run DevReplay`
+3. Run by `F1` + `Run DevReplay` or `F1` + `Fix by DevReplay`
 
 * (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
 
