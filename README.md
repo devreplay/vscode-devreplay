@@ -9,17 +9,31 @@ GitHub bot version is [here](https://github.com/apps/dev-avatar)
 1. Create your own programming style(`./devreplay.json`) on the root like bellow
 ```json
 [
- {
-    "code": [
-     "* == --> ==="
-    ]
- }
+    {
+       "code": [
+            "- console .",
+            "* log --> info",
+            "* \"Hello\" --> \"Hello World!\"",
+            "= )",
+            "+ ;"
+       ]
+    }
 ]
 ```
 This mean if your code has `==`, it should be `===`
 
+And create your code like this.
+```ts
+console.log("Hello")
+```
+
 2. Edit a your vscode settings' `devreplay.ruleFile` to `devreplay.json`
 3. Run by `F1` + `Run DevReplay` or `F1` + `Fix by DevReplay`
+
+It will be change
+```ts
+info("Hello World!");
+```
 
 * (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
 
