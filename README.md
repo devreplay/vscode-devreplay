@@ -1,8 +1,8 @@
 # DevReplay for Visual Studio Code
 
 A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
-Command Line version is [here](https://www.npmjs.com/package/devreplay)
-GitHub bot version is [here](https://github.com/apps/dev-avatar) (It is old version)
+* Command Line version is [here](https://www.npmjs.com/package/devreplay)
+* GitHub bot version is [here](https://github.com/apps/dev-avatar) (It is old version)
 
 ## Quick start
 
@@ -55,6 +55,11 @@ This extension contributes the following settings:
 
 ## Supported Language
 
+You do not need to care for any language.
+We are preparing default rules for each Language and Frameworks.
+
+### Languages
+
 * CPP
 * Java
 * JavsScript
@@ -63,8 +68,15 @@ This extension contributes the following settings:
 * TypeScript
 ...
 
-You do not need to care for any language
+### Frameworks
 
+* Tensorflow
+* Ruby on Rails
+* jQuery
+* Pandas
+* React
+* Unity 3D
+...
 
 ## Thanks
 
