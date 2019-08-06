@@ -1,26 +1,34 @@
 # DevReplay for Visual Studio Code
 
-A Visual Studio Code extension with support devreplay thas will suggest source code fix based on rule file.
-It is from [devreplay](https://www.npmjs.com/package/devreplay)
-GitHub bot version is [here](https://github.com/apps/dev-avatar)
+A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
+Command Line version is [here](https://www.npmjs.com/package/devreplay)
+GitHub bot version is [here](https://github.com/apps/dev-avatar) (It is old version)
 
 ## Quick start
 
-1. Create your own programming style(`./devreplay.json`) on the root like bellow
+1. Create your own programming style(`./devreplay.json`) on the root like bellow 
+
+(**Recommend**) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule file automatically
 ```json
 [
-    {
-        "condition": [
-            "for $0 in xrange($1.$2):"
-        ],
-        "consequent": [
-            "import six",
-            "for $0 in six.moves.range($1.$2):"
-        ],
-    }
+  {
+      "condition": [
+          "for $0 in range($1):"
+      ],
+      "consequent": [
+          "import six",
+          "for $0 in six.moves.range($1):"
+      ]
+  },
+  {
+      "condition": ["for $0 in range($1):"],
+      "consequent": ["for $0 in xrange($1):"]
+  }
 ]
 ```
-This mean if your code has `xrange`, it should be `six.moves.range`
+This mean if your code has `range`, it should be `six.moves.range` or `xrange` for the python2
+
+![Syntax](img/lint_sample.png)
 
 And create your code like this.
 ```python
@@ -29,7 +37,7 @@ for a in xrange(array.x):
 ```
 
 2. Edit a your vscode settings' `devreplay.ruleFile` to `devreplay.json`
-3. Run by `F1` + `Run DevReplay` or `F1` + `Fix by DevReplay`
+3. Save your file or `F1` + `Fix by DevReplay`
 
 It will be change
 ```python
@@ -38,24 +46,25 @@ for a in six.moves.range(array.x):
     pass
 ```
 
-* (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
-
 ## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
 
 This extension contributes the following settings:
 
-* `devreplay.ruleFile`: Programming style rule File for this extension
+* `devreplay.ruleFile`: The absolute path to the devreplay rules file
+* `devreplay.replayOnSave`: Whether to check files when saved
 
 ## Supported Language
 
-* TypeScript
-* JavaScript
-* Ruby
+* CPP
 * Java
+* JavsScript
+* Python
+* Ruby
+* TypeScript
+...
+
+You do not need to care for any language
+
 
 ## Thanks
 
