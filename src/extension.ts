@@ -27,22 +27,27 @@ async function lintFile() {
 	const diagsCollection: {[key: string]: Diagnostic[]} = {};
 	const ruleFile:string|undefined = await getRuleFilePath(config.get("ruleFile"));
 
-	const results = await lint(fileName, fileContent, ruleFile);	
+	const results = await lint(fileName, fileContent, ruleFile);
 
 	for (const result of results) {
-		const range = new Range(new Position(result.line - 1, 0),
-								new Position(result.line - 1, Number.MAX_SAFE_INTEGER));
-		const message = result.pattern.code.join("\n");
+		const range = new Range(new Position(result.position.start - 1, 0),
+								new Position(result.position.end - 1, Number.MAX_SAFE_INTEGER));
+		const message = code2String(result.pattern.condition, result.pattern.consequent);
 		const severity = DiagnosticSeverity.Information;
 		const diag = new Diagnostic(range, message, severity);
-		if (diagsCollection[result.fileName] === undefined) {
-			diagsCollection[result.fileName] = [];
+		if (diagsCollection[result.position.fileName] === undefined) {
+			diagsCollection[result.position.fileName] = [];
 		}
-		diagsCollection[result.fileName].push(diag);
-		diagnostics.set(Uri.file(result.fileName),
-		diagsCollection[result.fileName]);
+		diagsCollection[result.position.fileName].push(diag);
+		diagnostics.set(Uri.file(result.position.fileName),
+		diagsCollection[result.position.fileName]);
 	}
 }
+
+function code2String(condition: string[], consequent: string[]) {
+    return `${condition.join("")} should be ${consequent.join("")}`;
+}
+
 
 async function fix() {
 	const currentDocument = window.activeTextEditor;

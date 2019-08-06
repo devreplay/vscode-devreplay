@@ -10,29 +10,32 @@ GitHub bot version is [here](https://github.com/apps/dev-avatar)
 ```json
 [
     {
-       "code": [
-            "- console .",
-            "* log --> info",
-            "* \"Hello\" --> \"Hello World!\"",
-            "= )",
-            "+ ;"
-       ]
+        "condition": [
+            "for $0 in xrange($1.$2):"
+        ],
+        "consequent": [
+            "import six",
+            "for $0 in six.moves.range($1.$2):"
+        ],
     }
 ]
 ```
-This mean if your code has `==`, it should be `===`
+This mean if your code has `xrange`, it should be `six.moves.range`
 
 And create your code like this.
-```ts
-console.log("Hello")
+```python
+for a in xrange(array.x):
+    pass
 ```
 
 2. Edit a your vscode settings' `devreplay.ruleFile` to `devreplay.json`
 3. Run by `F1` + `Run DevReplay` or `F1` + `Fix by DevReplay`
 
 It will be change
-```ts
-info("Hello World!");
+```python
+import six
+for a in six.moves.range(array.x):
+    pass
 ```
 
 * (Option) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule automatically
@@ -50,12 +53,14 @@ This extension contributes the following settings:
 ## Supported Language
 
 * TypeScript
+* JavaScript
+* Ruby
+* Java
 
 ## Thanks
 
 This package is made based on
-* [vscode-python](https://github.com/Microsoft/vscode-python/blob/master/src/client/language/tokenizer.ts)
-* [vscode-textmate](https://github.com/microsoft/vscode-textmate)
+* [vscode-tslint](https://github.com/microsoft/vscode-tslint)
 
 We would like to thank the Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation.
 This system was supported by JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.

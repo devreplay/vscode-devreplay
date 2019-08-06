@@ -2,26 +2,26 @@
 	"name": "devreplay",
 	"displayName": "Devreplay",
 	"description": "Devreplay for Visual Studio Code",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
-    "icon": "img/icon.png",
-    "license": "SEE LICENSE IN LICENSE",
-    "galleryBanner": {
+	"icon": "img/icon.png",
+	"license": "SEE LICENSE IN LICENSE",
+	"galleryBanner": {
 		"color": "#444444",
-        "theme": "dark"
+		"theme": "dark"
 	},
 	"keywords": [
 		"Coding Style",
 		"Devreplay"
 	],
-    "repository": {
+	"repository": {
 		"type": "git",
-        "url": "https://github.com/Ikuyadeu/vscode-devreplay"
-    },
-    "bugs": {
-        "url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
-    },
+		"url": "https://github.com/Ikuyadeu/vscode-devreplay"
+	},
+	"bugs": {
+		"url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
+	},
 	"engines": {
 		"vscode": "^1.33.0"
 	},
@@ -35,15 +35,17 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "devreplay.run",
-			"title": "Run DevReplay"
-		},
-		{
-			"command": "devreplay.fix",
-			"title": "Fix by DevReplay"
-		}],
-		"configuration":[
+		"commands": [
+			{
+				"command": "devreplay.run",
+				"title": "Run DevReplay"
+			},
+			{
+				"command": "devreplay.fix",
+				"title": "Fix by DevReplay"
+			}
+		],
+		"configuration": [
 			{
 				"title": "devreplay",
 				"properties": {
@@ -64,7 +66,7 @@
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
-		"devreplay":"^0.1.4"
+		"devreplay": "^0.2.0"
 	},
 	"devDependencies": {
 		"typescript": "^3.5.2",
