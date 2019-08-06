@@ -60,10 +60,7 @@ function code2String(condition: string[], consequent: string[]) {
     return `${condition.join("")} should be ${consequent.join("")}`;
 }
 
-
 async function fix() {
-	console.log("hello")
-
 	const currentDocument = window.activeTextEditor;
 	if (currentDocument===undefined){
 		return;
@@ -72,7 +69,9 @@ async function fix() {
 	const ruleFile:string|undefined = await getRuleFilePath(config.get("ruleFile"));
 
 	const newContent = await lintAndFix(fileName, ruleFile);
-	fs.writeFileSync(fileName, newContent);
+	if (newContent !== ""){
+		fs.writeFileSync(fileName, newContent);
+	}
 }
 
 async function getRuleFilePath(ruleFile: string|undefined) {
