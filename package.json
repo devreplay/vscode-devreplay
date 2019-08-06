@@ -31,7 +31,8 @@
 	],
 	"activationEvents": [
 		"onCommand:devreplay.run",
-		"onCommand:devreplay.fix"
+		"onCommand:devreplay.fix",
+		"workspaceContains:**/devreplay.json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -47,12 +48,18 @@
 		],
 		"configuration": [
 			{
+				"type": "object",
 				"title": "devreplay",
 				"properties": {
 					"devreplay.ruleFile": {
 						"type": "string",
 						"default": "devreplay.json",
 						"description": "The absolute path to the devreplay rules file"
+					},
+					"devreplay.replayOnSave": {
+						"type": "boolean",
+						"default": true,
+						"description": "Whether to check files when saved"
 					}
 				}
 			}

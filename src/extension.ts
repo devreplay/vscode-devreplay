@@ -1,5 +1,5 @@
-import { Position, Range, window, ExtensionContext, commands, languages, DiagnosticSeverity, Diagnostic,Uri,workspace,WorkspaceFolder,WorkspaceFolderPickOptions } from "vscode";
-import { lint, lintAndFix } from "devreplay";
+import { Position, Range, window, ExtensionContext, commands, languages, DiagnosticSeverity, Diagnostic,Uri,workspace,WorkspaceFolder,WorkspaceFolderPickOptions, TextDocumentWillSaveEvent } from "vscode";
+import { lint, lintAndFix, ILintOut } from "devreplay";
 import * as path from 'path';
 import * as fs from 'fs';
 import { exec } from 'child_process';
@@ -11,7 +11,17 @@ export function activate(context: ExtensionContext) {
 	context.subscriptions.push(
 		commands.registerCommand('devreplay.run', lintFile),
 		commands.registerCommand('devreplay.fix', fix),
+		workspace.onWillSaveTextDocument(willSaveTextDocument),
 	);
+}
+
+async function willSaveTextDocument(e: TextDocumentWillSaveEvent) {
+	let replayOnSave = config.get("replayOnSave") as boolean;
+	const ruleFile:string|undefined = await getRuleFilePath(config.get("ruleFile"));
+	if (replayOnSave) {
+		const results = await lint(e.document.fileName, e.document.getText(), ruleFile);
+		updateDiagsByResults(results);
+	}
 }
 
 async function lintFile() {
@@ -22,13 +32,15 @@ async function lintFile() {
 		return;
 	}
 	const fileContent = currentDocument.document.getText();
-
 	const fileName = currentDocument.document.fileName;
-	const diagsCollection: {[key: string]: Diagnostic[]} = {};
 	const ruleFile:string|undefined = await getRuleFilePath(config.get("ruleFile"));
 
 	const results = await lint(fileName, fileContent, ruleFile);
+	updateDiagsByResults(results);
+}
 
+function updateDiagsByResults(results: ILintOut[]) {
+	const diagsCollection: {[key: string]: Diagnostic[]} = {};
 	for (const result of results) {
 		const range = new Range(new Position(result.position.start - 1, 0),
 								new Position(result.position.end - 1, Number.MAX_SAFE_INTEGER));
@@ -50,6 +62,8 @@ function code2String(condition: string[], consequent: string[]) {
 
 
 async function fix() {
+	console.log("hello")
+
 	const currentDocument = window.activeTextEditor;
 	if (currentDocument===undefined){
 		return;
