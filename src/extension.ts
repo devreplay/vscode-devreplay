@@ -1,8 +1,8 @@
-import { Position, Range, window, ExtensionContext, commands, languages, DiagnosticSeverity, Diagnostic,Uri,workspace,WorkspaceFolder,WorkspaceFolderPickOptions, TextDocumentWillSaveEvent } from "vscode";
+import { Position, Range, window, ExtensionContext, commands, languages, DiagnosticSeverity, Diagnostic,Uri,workspace, TextDocumentWillSaveEvent } from "vscode";
 import { lint, lintAndFix, ILintOut } from "devreplay";
 import * as path from 'path';
 import * as fs from 'fs';
-import { exec } from 'child_process';
+// import { exec } from 'child_process';
 
 const diagnostics = languages.createDiagnosticCollection("devreplay");
 const config = workspace.getConfiguration("devreplay");
@@ -88,45 +88,45 @@ async function getRuleFilePath(ruleFile: string|undefined) {
 }
 
 
-async function createDefaultRule() {
-	let folders = workspace.workspaceFolders;
-	let folder: WorkspaceFolder | undefined = undefined;
-	if (!folders) {
-		window.showErrorMessage('A Devreplay file can only be generated if VS Code is opened on a folder.');
-		return;
-	}
-	if (folders.length === 1) {
-		folder = folders[0];
-	} else {
-		const options: WorkspaceFolderPickOptions = {
-			placeHolder: "Select the folder for generating the 'devreplay.json' file"
-		};
-		folder = await window.showWorkspaceFolderPick(options);
-		if (!folder) {
-			return;
-		}
-	}
-	const folderPath = folder.uri.fsPath;
-	const devreplayRuleFile = path.join(folderPath, 'devreplay.json');
+// async function createDefaultRule() {
+// 	let folders = workspace.workspaceFolders;
+// 	let folder: WorkspaceFolder | undefined = undefined;
+// 	if (!folders) {
+// 		window.showErrorMessage('A Devreplay file can only be generated if VS Code is opened on a folder.');
+// 		return;
+// 	}
+// 	if (folders.length === 1) {
+// 		folder = folders[0];
+// 	} else {
+// 		const options: WorkspaceFolderPickOptions = {
+// 			placeHolder: "Select the folder for generating the 'devreplay.json' file"
+// 		};
+// 		folder = await window.showWorkspaceFolderPick(options);
+// 		if (!folder) {
+// 			return;
+// 		}
+// 	}
+// 	const folderPath = folder.uri.fsPath;
+// 	const devreplayRuleFile = path.join(folderPath, 'devreplay.json');
 
-	if (fs.existsSync(devreplayRuleFile)) {
-		window.showInformationMessage('A TSLint configuration file already exists.');
-		let document = await workspace.openTextDocument(devreplayRuleFile);
-		window.showTextDocument(document);
-	} else {
-		const devreplayCmd = await findDevreplay(folderPath);
-		const cmd = `${devreplayCmd} --init`;
-		const p = exec(cmd, { cwd: folderPath, env: process.env });
-		p.on('exit', async (code: number, _signal: string) => {
-			if (code === 0) {
-				let document = await workspace.openTextDocument(devreplayRuleFile);
-				window.showTextDocument(document);
-			} else {
-				window.showErrorMessage('Could not run `devreplay` to generate a configuration file. Please verify that you have `tslint` and `typescript` installed.');
-			}
-		});
-	}
-}
+// 	if (fs.existsSync(devreplayRuleFile)) {
+// 		window.showInformationMessage('A TSLint configuration file already exists.');
+// 		let document = await workspace.openTextDocument(devreplayRuleFile);
+// 		window.showTextDocument(document);
+// 	} else {
+// 		const devreplayCmd = await findDevreplay(folderPath);
+// 		const cmd = `${devreplayCmd} --init`;
+// 		const p = exec(cmd, { cwd: folderPath, env: process.env });
+// 		p.on('exit', async (code: number, _signal: string) => {
+// 			if (code === 0) {
+// 				let document = await workspace.openTextDocument(devreplayRuleFile);
+// 				window.showTextDocument(document);
+// 			} else {
+// 				window.showErrorMessage('Could not run `devreplay` to generate a configuration file. Please verify that you have `tslint` and `typescript` installed.');
+// 			}
+// 		});
+// 	}
+// }
 
 function exists(file: string): Promise<boolean> {
 	return new Promise<boolean>((resolve, _reject) => {
