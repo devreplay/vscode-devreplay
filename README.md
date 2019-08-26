@@ -6,6 +6,7 @@ A Visual Studio Code extension with that will suggest source code fix based on y
 
 ## Quick start
 
+0. Install this extension!
 1. Create your own programming style(`./devreplay.json`) on the root like bellow 
 
 (**Recommend**) [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) can generate your rule file automatically
