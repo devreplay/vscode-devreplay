@@ -4,6 +4,8 @@ A Visual Studio Code extension with that will suggest source code fix based on y
 * Command Line version is [here](https://www.npmjs.com/package/devreplay)
 * GitHub bot version is [here](https://github.com/apps/dev-avatar) (It is old version)
 
+![howtouse](img/DevReplayReplay.gif)
+
 ## Quick start
 
 0. Install this extension!
