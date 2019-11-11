@@ -1,4 +1,4 @@
-import { ILintOut, lint, lintAndFix } from "devreplay";
+import { ILintOut, IPattern, lint, lintAndFix } from "devreplay";
 import * as fs from "fs";
 import * as path from "path";
 import { commands, Diagnostic, DiagnosticSeverity, ExtensionContext, languages,
@@ -44,7 +44,7 @@ function updateDiagsByResults(results: ILintOut[]) {
     for (const result of results) {
         const range = new Range(new Position(result.position.start - 1, 0),
                                 new Position(result.position.end - 1, Number.MAX_SAFE_INTEGER));
-        const message = code2String(result.pattern.condition, result.pattern.consequent);
+        const message = code2String(result.pattern);
         const severity = makeSeverity(result.pattern.severity);
         const diag = new Diagnostic(range, message, severity);
         if (!(diagsCollection.hasOwnProperty(result.position.fileName))) {
@@ -71,8 +71,12 @@ function makeSeverity(severity?: string) {
     }
 }
 
-function code2String(condition: string[], consequent: string[]) {
-    return `${condition.join("")} should be ${consequent.join("")}`;
+export function code2String(pattern: IPattern) {
+    if (pattern.description !== undefined) {
+        return pattern.description;
+    }
+
+    return `${pattern.condition.join("")} should be ${pattern.consequent.join("")}`;
 }
 
 async function fix() {
