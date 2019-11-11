@@ -164,7 +164,7 @@ async function findDevreplay(rootPath: string): Promise<string> {
     if (platform === "win32" && await exists(path.join(rootPath, "node_modules", ".bin", "devreplay.cmd"))) {
         return path.join(".", "node_modules", ".bin", "devreplay.cmd");
     }
-    if ((platform === "linux" || platform === "darwin") && 
+    if ((platform === "linux" || platform === "darwin") &&
          await exists(path.join(rootPath, "node_modules", ".bin", "devreplay"))) {
         return path.join(".", "node_modules", ".bin", "devreplay");
     }

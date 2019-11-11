@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "Devreplay",
 	"description": "Devreplay for Visual Studio Code",
-	"version": "0.0.9",
+	"version": "0.1.0",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
@@ -23,7 +23,7 @@
 		"url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
 	},
 	"engines": {
-		"vscode": "^1.33.0"
+		"vscode": "^1.40.0"
 	},
 	"categories": [
 		"Other",
@@ -76,11 +76,10 @@
 		"devreplay": "^0.3.0"
 	},
 	"devDependencies": {
+		"@types/node": "^12.7.7",
+		"@types/mocha": "^5.2.7",
 		"typescript": "^3.7.2",
 		"vscode": "^1.1.36",
-		"tslint": "^5.20.0",
-		"@types/vscode": "^1.40.0",
-		"@types/node": "^12.7.2",
-		"@types/mocha": "^5.2.7"
+		"tslint": "^5.20.1"
 	}
 }
