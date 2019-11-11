@@ -2,7 +2,7 @@
 
 A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
 * Command Line version is [here](https://www.npmjs.com/package/devreplay)
-* GitHub bot version is [here](https://github.com/apps/dev-avatar) (It is old version)
+* GitHub bot version is [here](https://github.com/marketplace/dev-replay) (It is old version)
 
 ![howtouse](img/DevReplayReplay.gif)
 
@@ -21,11 +21,13 @@ A Visual Studio Code extension with that will suggest source code fix based on y
       "consequent": [
           "import six",
           "for $0 in six.moves.range($1):"
-      ]
+      ],
+      "severity": "W"
   },
   {
       "condition": ["for $0 in range($1):"],
-      "consequent": ["for $0 in xrange($1):"]
+      "consequent": ["for $0 in xrange($1):"],
+      "severity": "I"
   }
 ]
 ```
