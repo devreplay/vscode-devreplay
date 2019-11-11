@@ -2,6 +2,10 @@
 
 ## 0.1.0
 
+* Get rule description
+
+## 0.1.0
+
 * Add severity function
 
 ## 0.0.5
