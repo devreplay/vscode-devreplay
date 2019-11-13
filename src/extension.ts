@@ -25,8 +25,6 @@ async function willSaveTextDocument(e: TextDocumentWillSaveEvent) {
 }
 
 async function lintFile() {
-    diagnostics.clear();
-
     const currentDocument = window.activeTextEditor;
     if (currentDocument === undefined) {
         return;
@@ -40,6 +38,7 @@ async function lintFile() {
 }
 
 function updateDiagsByResults(results: ILintOut[]) {
+    diagnostics.clear();
     const diagsCollection: {[key: string]: Diagnostic[]} = {};
     for (const result of results) {
         const range = new Range(new Position(result.position.start - 1, 0),
