@@ -1,6 +1,10 @@
 # Change Log
 
-## 0.1.0
+## 0.1.2
+
+* Fix to initialize diagnostics status
+
+## 0.1.1
 
 * Get rule description
 
