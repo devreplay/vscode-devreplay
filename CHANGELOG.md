@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.1.3
+
+* Update icon
+
 ## 0.1.2
 
 * Fix to initialize diagnostics status
