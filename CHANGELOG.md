@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.0
+
+* Add quick fix
+
 ## 0.1.3
 
 * Update icon
