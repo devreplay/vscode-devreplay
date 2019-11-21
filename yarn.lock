@@ -9,6 +9,13 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
+"@babel/code-frame@^7.5.5":
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.5.5.tgz#bc0782f6d69f7b7d49531219699b988f669a8f9d"
+  integrity sha512-27d4lZoomVyo51VegxI20xZPuSHusqbQag/ztrBC7wegWoQ1nLREPVSKSW8byhTlzTKyNE4ifaTA6lCp7JjpFw==
+  dependencies:
+    "@babel/highlight" "^7.0.0"
+
 "@babel/highlight@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0.tgz#f710c38c8d458e6dd9a201afb637fcb781ce99e4"
@@ -205,17 +212,17 @@ delayed-stream@~1.0.0:
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
   integrity sha1-3zrhmayt+31ECqrgsp4icrJOxhk=
 
-devreplay@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/devreplay/-/devreplay-0.3.0.tgz#5bf827c5e17c6e99e209c1b1b91cb2e9a4460379"
-  integrity sha512-YC93XJfaGSctXvogRWPPyU0TtKkkexRwQ9isMYyrMSDTIJKrnirPLktgfTTm5fWKmfPJZ+UT82edQEDgRFNXHQ==
+devreplay@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/devreplay/-/devreplay-0.3.3.tgz#2b0a034085d54917e660bd879089619595914830"
+  integrity sha512-fQ0FSHsiDlXzJDuVYFmX0r5x2FihSbFwji1/hr3zbvHbGAAJp9X1FyxyNhsoradQEvmoSQpp3qeeNkX2J+H0pQ==
   dependencies:
-    "@babel/code-frame" "^7.0.0"
+    "@babel/code-frame" "^7.5.5"
     builtin-modules "^3.1.0"
     commander "^2.20.0"
     tslib "^1.10.0"
-    tsutils "^3.17.0"
-    unicode "^11.0.1"
+    tsutils "^3.17.1"
+    unicode "^12.1.0"
 
 diff@3.5.0:
   version "3.5.0"
@@ -705,10 +712,10 @@ tsutils@^2.29.0:
   dependencies:
     tslib "^1.8.1"
 
-tsutils@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.17.0.tgz#c3ccab927a475aa2beef6a3695c2ff76da13cdf8"
-  integrity sha512-fyveWOtAXfumAxIqkcMHuPaaVyLBKjB8Y00ANZkqh+HITBAQscCbQIHwwBTJdvQq7RykLEbOPcUUnJ16X4NA0g==
+tsutils@^3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/tsutils/-/tsutils-3.17.1.tgz#ed719917f11ca0dee586272b2ac49e015a2dd759"
+  integrity sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g==
   dependencies:
     tslib "^1.8.1"
 
@@ -729,10 +736,10 @@ typescript@^3.7.2:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.2.tgz#27e489b95fa5909445e9fef5ee48d81697ad18fb"
   integrity sha512-ml7V7JfiN2Xwvcer+XAf2csGO1bPBdRbFCkYBczNZggrBZ9c7G3riSUeJmqEU5uOtXNPMhE3n+R4FA/3YOAWOQ==
 
-unicode@^11.0.1:
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/unicode/-/unicode-11.0.1.tgz#735bd422ec75cf28d396eb224d535d168d5f1db6"
-  integrity sha512-+cHtykLb+eF1yrSLWTwcYBrqJkTfX7Quoyg7Juhe6uylF43ZbMdxMuSHNYlnyLT8T7POAvavgBthzUF9AIaQvQ==
+unicode@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/unicode/-/unicode-12.1.0.tgz#7ee53a7a0ca5539b353419432823d8da58bbbf33"
+  integrity sha512-Ty6+Ew21DiYTWLYtd05RF/X4c1ekOvOgANyHbBj0h3MaXpfaGr2Rdmc0hMFuGQLyPLb9cU4ArNxl0bTF5HSzXw==
 
 uri-js@^4.2.2:
   version "4.2.2"

@@ -27,20 +27,16 @@
 	},
 	"categories": [
 		"Other",
-		"Linters"
+		"Linters",
+		"Formatters"
 	],
 	"activationEvents": [
-		"onCommand:devreplay.run",
 		"onCommand:devreplay.fix",
 		"workspaceContains:**/devreplay.json"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "devreplay.run",
-				"title": "Run DevReplay"
-			},
 			{
 				"command": "devreplay.fix",
 				"title": "Fix by DevReplay"
@@ -73,7 +69,7 @@
 		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
-		"devreplay": "^0.3.0"
+		"devreplay": "^0.3.3"
 	},
 	"devDependencies": {
 		"@types/node": "^12.7.7",
