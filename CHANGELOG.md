@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1
+
+* Update devreplay version
+
 ## 0.2.0
 
 * Add quick fix
