@@ -1,4 +1,4 @@
-import { fixByLint, lint, lintAndFix } from "devreplay";
+import { fixFromFile, fixWithPattern, lint } from "devreplay";
 import * as fs from "fs";
 import { CodeAction, CodeActionContext, CodeActionKind, CodeActionProvider,
          commands, Diagnostic, ExtensionContext, languages,
@@ -33,7 +33,7 @@ export class DevReplayActionProvider implements CodeActionProvider {
         const target = document.getText(diag.range);
 
         fixAction.edit = new WorkspaceEdit();
-        fixAction.edit.replace(document.uri, diag.range, fixByLint(target, targetRule));
+        fixAction.edit.replace(document.uri, diag.range, fixWithPattern(target, targetRule.pattern));
 
         return fixAction;
     }
@@ -53,8 +53,7 @@ export function activate(context: ExtensionContext) {
                                                "ruby", "cpp", "c", "typescript"],
                                               new DevReplayActionProvider(), {
             providedCodeActionKinds: DevReplayActionProvider.providedCodeActionKinds,
-        }),
-    );
+        }));
 }
 
 function fix() {
@@ -65,7 +64,7 @@ function fix() {
     const fileName = currentDocument.document.fileName;
     const ruleFile: string | undefined = getDevReplayPath();
 
-    const newContent = lintAndFix(fileName, ruleFile);
+    const newContent = fixFromFile(fileName, ruleFile);
     if (newContent !== "") {
         fs.writeFileSync(fileName, newContent);
     }
