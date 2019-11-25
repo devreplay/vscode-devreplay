@@ -56,7 +56,7 @@ function lintFile(doc: TextDocument) {
     const fileContent = doc.getText();
     const fileName = doc.fileName;
     const ruleFile = getDevReplayPath();
-    if (ruleFile !== undefined && fileName.endsWith(ruleFile)) {
+    if (ruleFile !== undefined && fileName.endsWith(ruleFile) || fileName.endsWith(".git")) {
         return [];
     }
     const results = lint(fileName, fileContent, ruleFile);
