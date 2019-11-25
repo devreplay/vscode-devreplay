@@ -2,6 +2,10 @@
 
 ## 0.2.1
 
+* Filter `.git` file from target
+
+## 0.2.1
+
 * Update devreplay version
 
 ## 0.2.0
