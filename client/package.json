@@ -1,0 +1,24 @@
+{
+	"name": "devreplay-client",
+	"displayName": "Language Server Client for DevReplay",
+	"version": "1.0.0",
+	"private": true,
+	"author": "Ikuyadeu",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Ikuyadeu/devreplay-lsp.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Ikuyadeu/devreplay-lsp/issues"
+	},
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"devDependencies": {
+		"@types/vscode": "1.38.0"
+	},
+	"dependencies": {
+		"vscode-languageclient": "5.2.1"
+	}
+}

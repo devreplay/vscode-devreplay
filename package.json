@@ -1,8 +1,8 @@
 {
-	"name": "devreplay",
+	"name": "devreplay-vscode",
 	"displayName": "Devreplay",
 	"description": "Devreplay for Visual Studio Code",
-	"version": "0.2.2",
+	"version": "1.0.0",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
@@ -34,43 +34,25 @@
 		"onCommand:devreplay.fix",
 		"workspaceContains:**/devreplay.json"
 	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "devreplay.fix",
-				"title": "Fix by DevReplay"
-			}
-		],
-		"configuration": [
-			{
-				"type": "object",
-				"title": "devreplay",
-				"properties": {
-					"devreplay.ruleFile": {
-						"type": "string",
-						"default": "devreplay.json",
-						"description": "The absolute path to the devreplay rules file"
-					}
-				}
-			}
-		]
-	},
+	"main": "./client/out/extension",
 	"scripts": {
-		"vscode:prepublish": "yarn run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "yarn run compile && node ./node_modules/vscode/bin/test"
-	},
-	"dependencies": {
-		"devreplay": "^0.3.5"
+		"vscode:prepublish": "npm run webpack",
+		"webpack": "npm run clean && webpack --mode production --config ./client/webpack.config.js && webpack --mode production --config ./server/webpack.config.js",
+		"webpack:dev": "npm run clean && webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
+		"compile": "tsc -b",
+		"compile:client": "tsc -b ./client/tsconfig.json",
+		"compile:server": "tsc -b ./server/tsconfig.json",
+		"watch": "tsc -b -w",
+		"clean": "rimraf client/out && rimraf server/out",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd .."
 	},
 	"devDependencies": {
-		"@types/node": "^12.7.7",
-		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.12.14",
+		"merge-options": "^1.0.1",
+		"rimraf": "^3.0.0",
+		"ts-loader": "^5.4.5",
 		"typescript": "^3.7.2",
-		"vscode": "^1.1.36",
-		"tslint": "^5.20.1"
+		"webpack": "^4.39.2",
+		"webpack-cli": "^3.3.7"
 	}
 }
