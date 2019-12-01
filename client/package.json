@@ -1,16 +1,17 @@
 {
-	"name": "devreplay-client",
-	"displayName": "Language Server Client for DevReplay",
+	"name": "client",
+	"displayName": "DevReplay",
+	"description": "Integrates DevReplay into VS Code.",
 	"version": "1.0.0",
 	"private": true,
 	"author": "Ikuyadeu",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ikuyadeu/devreplay-lsp.git"
+		"url": "https://github.com/Ikuyadeu/vscode-devreplay.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Ikuyadeu/devreplay-lsp/issues"
+		"url": "https://github.com/Ikuyadeu/vscode-devreplay./issues"
 	},
 	"engines": {
 		"vscode": "^1.38.0"

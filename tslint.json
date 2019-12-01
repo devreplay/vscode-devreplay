@@ -8,8 +8,10 @@
         "typedef": false,
         "no-magic-numbers":false,
         "no-floating-promises":false,
+        "no-namespace":false,
         "no-implicit-dependencies": false,
         "interface-name": false,
-        "newline-per-chained-call": false
+        "newline-per-chained-call": false,
+        "comment-format": false
     }
 }

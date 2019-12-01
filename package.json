@@ -1,6 +1,6 @@
 {
-	"name": "devreplay-vscode",
-	"displayName": "Devreplay",
+	"name": "devreplay",
+	"displayName": "DevReplay",
 	"description": "Devreplay for Visual Studio Code",
 	"version": "1.0.0",
 	"author": "Yuki Ueda",

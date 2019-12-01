@@ -8,11 +8,14 @@ export function activate(context: ExtensionContext): void {
     const serverModule = context.asAbsolutePath(path.join("server", "out", "server.js"));
     const serverOptions: ServerOptions = {
         run: { module: serverModule, transport: TransportKind.ipc, options: { cwd: process.cwd() } },
-        debug: { module: serverModule, transport: TransportKind.ipc, options: { execArgv: ["--nolazy", "--inspect=6011"], cwd: process.cwd() } },
+        debug: {
+            module: serverModule,
+            transport: TransportKind.ipc,
+            options: { execArgv: ["--nolazy", "--inspect=6011"], cwd: process.cwd() }},
     };
 
     const clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: "file", language: "plaintext" }],
+        documentSelector: [{ scheme: "file", language: "python" }],
         diagnosticCollectionName: "sample",
         revealOutputChannelOn: RevealOutputChannelOn.Never,
         // progressOnInitialization: true,
@@ -32,7 +35,7 @@ export function activate(context: ExtensionContext): void {
 
     let client: LanguageClient;
     try {
-        client = new LanguageClient("DevReplay", serverOptions, clientOptions);
+        client = new LanguageClient("DevReplay Server", serverOptions, clientOptions);
     } catch (err) {
         Window.showErrorMessage("The extension couldn't be started. See the output channel for details.");
 
@@ -43,7 +46,4 @@ export function activate(context: ExtensionContext): void {
     context.subscriptions.push(
         client.start(),
     );
-}
-
-export function deactivate() {
 }

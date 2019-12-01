@@ -15,11 +15,6 @@
     "vscode-uri": "^2.1.1"
   },
   "devDependencies": {
-    "@types/minimatch": "^3.0.3",
-    "@types/mocha": "^5.2.1",
-    "@types/node": "^10.3.0",
-    "@types/semver": "^5.3.30",
-    "mocha": "^5.2.0",
     "tslint": "^5.20.1",
     "typescript": "^3.7.2"
   },
