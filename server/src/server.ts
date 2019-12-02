@@ -1,6 +1,6 @@
 "use strict";
 
-import { code2String, fixWithPattern, ILintOut, IPattern, lint, makeSeverity} from "devreplay";
+import { code2String, fixWithPattern, ILintOut, IPattern, lint, makeSeverity } from "devreplay";
 import {
     CodeAction,
     CodeActionKind,
