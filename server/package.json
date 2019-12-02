@@ -8,12 +8,12 @@
   },
   "license": "MIT",
   "repository": {
-		"type": "git",
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
-	},
+    "type": "git",
+    "url": "https://github.com/Ikuyadeu/vscode-devreplay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
+  },
   "dependencies": {
     "vscode-languageserver-textdocument": "^1.0.0-next.5",
     "vscode-languageserver": "6.0.0-next.7",
