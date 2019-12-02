@@ -1,8 +1,15 @@
+Language Server for DevReplay
+
+https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-user-input-sample
+eslint: https://github.com/microsoft/vscode-eslint/blob/master/server/src/eslintServer.ts
+jshint: https://github.com/microsoft/vscode-jshint/blob/master/jshint-server/src/server.ts
+
+
 # DevReplay for Visual Studio Code
 
 A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
 * Command Line version is [here](https://www.npmjs.com/package/devreplay)
-* GitHub bot version is [here](https://github.com/marketplace/dev-replay) (It is old version)
+* GitHub bot version is [here](https://github.com/marketplace/dev-replay)
 
 ![howtouse](img/DevReplayReplay.gif)
 

@@ -1,5 +1,8 @@
-.DS_Store
-out
-node_modules
-.vscode-test/
 *.vsix
+node_modules
+client/out
+client/node_modules
+server/out
+server/node_modules
+server/samples
+.DS_Store
