@@ -26,10 +26,6 @@ namespace CommandIDs {
 const connection = createConnection();
 connection.console.info(`DevReplay server running in node ${process.version}`);
 let documents!: TextDocuments<TextDocument>;
-// Create a simple text document manager. The text document manager
-// Supports full document sync only
-// Make the text document manager listen on the connection
-// For open, change and close text document events
 let workspaceFolder: string | undefined;
 
 connection.onInitialize((params: InitializeParams) => {
@@ -61,7 +57,6 @@ connection.onInitialize((params: InitializeParams) => {
 /**
  * Analyzes the text document for problems.
  * @param doc text document to analyze
- * @param devreplayDiagnostics diagnostic collection
  */
 function validate(doc: TextDocument) {
     const diagnostics: Diagnostic[] = [];

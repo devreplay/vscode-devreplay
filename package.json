@@ -8,8 +8,8 @@
 	"icon": "img/icon.png",
 	"license": "SEE LICENSE IN LICENSE",
 	"galleryBanner": {
-		"color": "#444444",
-		"theme": "dark"
+		"color": "#FFFFFF",
+		"theme": "light"
 	},
 	"keywords": [
 		"Coding Style",
