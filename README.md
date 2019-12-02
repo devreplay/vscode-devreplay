@@ -1,10 +1,3 @@
-Language Server for DevReplay
-
-https://github.com/microsoft/vscode-extension-samples/tree/master/lsp-user-input-sample
-eslint: https://github.com/microsoft/vscode-eslint/blob/master/server/src/eslintServer.ts
-jshint: https://github.com/microsoft/vscode-jshint/blob/master/jshint-server/src/server.ts
-
-
 # DevReplay for Visual Studio Code
 
 A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
