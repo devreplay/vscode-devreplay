@@ -1,6 +1,6 @@
 "use strict";
 
-import { code2String, fixWithPattern, ILintOut, IPattern, lint, makeSeverity } from "devreplay";
+import { code2String, fixWithPattern, ILintOut, IPattern, lint, makeSeverity} from "devreplay";
 import {
     CodeAction,
     CodeActionKind,
@@ -25,24 +25,28 @@ namespace CommandIDs {
 // Also include all preview / proposed LSP features.
 const connection = createConnection();
 connection.console.info(`DevReplay server running in node ${process.version}`);
-
+let documents!: TextDocuments<TextDocument>;
 // Create a simple text document manager. The text document manager
 // Supports full document sync only
-const documents: TextDocuments = new TextDocuments();
 // Make the text document manager listen on the connection
 // For open, change and close text document events
-documents.listen(connection);
 let workspaceFolder: string | undefined;
 
 connection.onInitialize((params: InitializeParams) => {
     const workspaceFolders = params.workspaceFolders;
     workspaceFolder = workspaceFolders !== null ? workspaceFolders[0].uri : undefined;
+    documents = new TextDocuments(TextDocument);
+    setupDocumentsListeners();
 
     return {
         capabilities: {
             textDocumentSync: {
                 openClose: true,
                 change: TextDocumentSyncKind.Incremental,
+                willSaveWaitUntil: false,
+                save: {
+                    includeText: false,
+                },
             },
             codeActionProvider: {
                 codeActionKinds: [CodeActionKind.QuickFix],
@@ -63,80 +67,84 @@ function validate(doc: TextDocument) {
     const diagnostics: Diagnostic[] = [];
     const results = lintFile(doc);
     for (let i = 0; i < results.length; i += 1) {
-        diagnostics.push(makeDiagnostic(results[i], i));
+        const result = results[i];
+        diagnostics.push(makeDiagnostic(result, i));
     }
     connection.sendDiagnostics({ uri: doc.uri, diagnostics });
-}
-
-function makeDiagnostic(result: ILintOut, ruleCode: number): Diagnostic {
-    const range: Range = {start: {line: result.position.start - 1, character: 0},
-                          end: {line: result.position.end - 1, character: Number.MAX_SAFE_INTEGER}};
-    const message = code2String(result.pattern);
-    const severity = convertSeverity(makeSeverity(result.pattern.severity));
-
-    return {
-        range,
-        severity,
-        code: ruleCode,
-        message,
-        source: "devreplay",
-    };
-}
-
-documents.onDidOpen((event) => {
-    validate(event.document);
-});
-
-documents.onDidChangeContent((change) => {
-    validate(change.document);
-});
-
-connection.onCodeAction((params) => {
-    if (workspaceFolder === undefined) {
-        return [];
-    }
-    const diagnostics = params.context.diagnostics.filter((diag) => diag.source === "devreplay");
-    if (diagnostics.length === 0) {
-        return [];
-    }
-    const textDocument = documents.get(params.textDocument.uri);
-    if (textDocument === undefined) {
-        return [];
-    }
-    const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
-    const codeActions: CodeAction[] = [];
-    const results = lint(textDocument.uri, textDocument.getText(), ruleFile);
-    diagnostics.forEach((diag) => {
-        const targetRule = results[Number(diag.code)];
-        const title = "Fix by devreplay";
-        const fixAction = CodeAction.create(title,
-                                            createEditByPattern(textDocument, diag.range, targetRule.pattern),
-                                            CodeActionKind.QuickFix);
-        fixAction.diagnostics = [diag];
-        codeActions.push(fixAction);
-    });
-
-    return codeActions;
-});
-
-function createEditByPattern(document: TextDocument, range: Range, pattern: IPattern): WorkspaceEdit {
-    const edits = [TextEdit.replace(range, fixWithPattern(document.getText(range), pattern))];
-
-    return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
 }
 
 function lintFile(doc: TextDocument) {
     if (workspaceFolder === undefined) {
         return [];
     }
-    const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
     const fileContent = doc.getText();
+    const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
     const fileName = URI.parse(doc.uri).fsPath;
     if (fileName.endsWith(ruleFile) || fileName.endsWith(".git")) {
         return [];
     }
 
     return lint(fileName, fileContent, ruleFile);
+}
+
+function makeDiagnostic(result: ILintOut, ruleCode: number): Diagnostic {
+    const range: Range = {start: {line: result.position.start - 1, character: 0},
+                          end: {line: result.position.end - 1, character: Number.MAX_VALUE}};
+    const message = code2String(result.pattern);
+    const severity = convertSeverity(makeSeverity(result.pattern.severity));
+    const diagnostic = Diagnostic.create(range, message, severity, ruleCode, "devreplay");
+
+    return diagnostic;
+}
+
+function setupDocumentsListeners() {
+    documents.listen(connection);
+
+    documents.onDidOpen((event) => {
+        validate(event.document);
+    });
+
+    documents.onDidChangeContent((change) => {
+        validate(change.document);
+    });
+
+    documents.onDidClose((close) => {
+        connection.sendDiagnostics({ uri: close.document.uri, diagnostics: []});
+    });
+
+    connection.onCodeAction((params) => {
+        if (workspaceFolder === undefined) {
+            return [];
+        }
+        const diagnostics = params.context.diagnostics.filter((diag) => diag.source === "devreplay");
+        if (diagnostics.length === 0) {
+            return [];
+        }
+        const textDocument = documents.get(params.textDocument.uri);
+        if (textDocument === undefined) {
+            return [];
+        }
+        const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
+        const codeActions: CodeAction[] = [];
+        const results = lint(textDocument.uri, textDocument.getText(), ruleFile);
+        diagnostics.forEach((diag) => {
+            const targetRule = results[Number(diag.code)];
+            const title = "Fix by devreplay";
+            const fixAction = CodeAction.create(title,
+                                                createEditByPattern(textDocument, diag.range, targetRule.pattern),
+                                                CodeActionKind.QuickFix);
+            fixAction.diagnostics = [diag];
+            codeActions.push(fixAction);
+        });
+
+        return codeActions;
+    });
+}
+
+function createEditByPattern(document: TextDocument, range: Range, pattern: IPattern): WorkspaceEdit {
+    const edits = [TextEdit.replace(range, fixWithPattern(document.getText(range), pattern).replace(/\r?\n|\r/g, ""))];
+
+    return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
 }
 
 function convertSeverity(severity: string) {
