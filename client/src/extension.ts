@@ -6,31 +6,51 @@ import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOpt
 
 export function activate(context: ExtensionContext): void {
     const serverModule = context.asAbsolutePath(path.join("server", "out", "server.js"));
+    const debugOptions = { execArgv: ["--nolazy", "--inspect=6009"], cwd: process.cwd() };
     const serverOptions: ServerOptions = {
         run: { module: serverModule, transport: TransportKind.ipc, options: { cwd: process.cwd() } },
         debug: {
             module: serverModule,
             transport: TransportKind.ipc,
-            options: { execArgv: ["--nolazy", "--inspect=6011"], cwd: process.cwd() }},
+            options: debugOptions,
+        },
     };
-
     const clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: "file", language: "python" }],
-        diagnosticCollectionName: "sample",
+        documentSelector: [
+            {
+                scheme: "file",
+                language: "plaintext",
+            },
+            {
+                scheme: "file",
+                language: "python",
+            },
+            {
+                scheme: "file",
+                language: "ruby",
+            },
+            {
+                scheme: "file",
+                language: "java",
+            },
+            {
+                scheme: "file",
+                language: "javascript",
+            },
+            {
+                scheme: "file",
+                language: "typescript",
+            },
+            {
+                scheme: "file",
+                language: "cpp",
+            },
+            {
+                scheme: "file",
+                language: "c",
+            }],
+        diagnosticCollectionName: "devreplay",
         revealOutputChannelOn: RevealOutputChannelOn.Never,
-        // progressOnInitialization: true,
-        // middleware: {
-        //     executeCommand: async (command, args, next) => {
-        //         const selected = await Window.showQuickPick(["Visual Studio", "Visual Studio Code"]);
-        //         if (selected === undefined) {
-        //             return next(command, args);
-        //         }
-        //         args = args.slice(0);
-        //         args.push(selected);
-
-        //         return next(command, args);
-        //     },
-        // },
     };
 
     let client: LanguageClient;
