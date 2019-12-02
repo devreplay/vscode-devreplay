@@ -60,21 +60,10 @@ connection.onInitialize((params: InitializeParams) => {
  * @param devreplayDiagnostics diagnostic collection
  */
 function validate(doc: TextDocument) {
-    // const settings = await getDocumentSettings(doc.uri);
-    // console.log(settings);
     const diagnostics: Diagnostic[] = [];
     const results = lintFile(doc);
-    // if (results.length === 0) {
-    //     return;
-    // }
     for (let i = 0; i < results.length; i += 1) {
         diagnostics.push(makeDiagnostic(results[i], i));
-        // RecordCodeAction(doc, results[i])
-        // CodeAction.create(
-        //     Title: code2String(results[i].pattern),
-
-        //     Kind:
-        // );
     }
     connection.sendDiagnostics({ uri: doc.uri, diagnostics });
 }
@@ -120,9 +109,11 @@ connection.onCodeAction((params) => {
     diagnostics.forEach((diag) => {
         const targetRule = results[Number(diag.code)];
         const title = "Fix by devreplay";
-        codeActions.push(CodeAction.create(title,
-                                           createEditByPattern(textDocument, diag.range, targetRule.pattern),
-                                           CodeActionKind.QuickFix));
+        const fixAction = CodeAction.create(title,
+                                            createEditByPattern(textDocument, diag.range, targetRule.pattern),
+                                            CodeActionKind.QuickFix);
+        fixAction.diagnostics = [diag];
+        codeActions.push(fixAction);
     });
 
     return codeActions;
