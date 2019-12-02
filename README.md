@@ -25,8 +25,8 @@ A Visual Studio Code extension with that will suggest source code fix based on y
       "severity": "W"
   },
   {
-      "condition": ["for $0 in range($1):"],
-      "consequent": ["for $0 in xrange($1):"],
+      "condition": ["hello $1"],
+      "consequent": ["Hello $1!!!"],
       "severity": "I"
   }
 ]
@@ -60,33 +60,20 @@ This extension contributes the following settings:
 
 ## Supported Language
 
-You do not need to care for any language.
-We are preparing default rules for each Language and Frameworks.
-
-### Languages
-
 * CPP
 * Java
 * JavsScript
 * Python
 * Ruby
 * TypeScript
-...
+* Plain Text
 
-### Frameworks
-
-* Tensorflow
-* Ruby on Rails
-* jQuery
-* Pandas
-* React
-* Unity 3D
-...
 
 ## Thanks
 
 This package is made based on
 * [vscode-tslint](https://github.com/microsoft/vscode-tslint)
+* [vscode-eslint](https://github.com/microsoft/vscode-eslint)
 
 We would like to thank the Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation.
 This system was supported by JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
