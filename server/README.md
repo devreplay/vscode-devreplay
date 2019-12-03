@@ -5,41 +5,51 @@
 * [x] Visual Studio Code
 * [ ] Atom
 * [ ] Sublime Text
-* [ ] Vim/NeoVim
+* [x] Vim/NeoVim
 * [ ] Emacs
+
+### Install
+
+```
+npm install -g devreplay-server
+```
 
 ### Visual Studio Code
 
 DevReplay for VS Code is available [here]((https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.devreplay))
 
-<!-- ### Atom
-
-### Sublime Text
-
 ### vim and neovim
-Use [coc-tslint-plugin](https://github.com/neoclide/coc-tslint-plugin) as extension of [coc.nvim](https://github.com/neoclide/coc.nvim).
 
-Run command in your vim after coc.nvim installed:
+1. Install `devreplay-server`
+2. Install [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim/blob/next/INSTALL.md)
+3. Add the following to neovim's configuration (the case if you want to use for python and javascript)
 
-```
-:CocInstall coc-tsserver coc-tslint-plugin
-```
-
-Run command `:CocConfig` to open configuration file.
 ```vim
 let g:LanguageClient_serverCommands = {
-    \ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
+    \ 'python': ['devreplay-server', '--studio'],
+    \ 'javascript': ['devreplay-server', '--studio'],
     \ }
 ```
 
-or use [coc-r-lsp](https://github.com/neoclide/coc-r-lsp) with [coc.nvim](https://github.com/neoclide/coc.nvim)
+### Atom IDE
 
+* TODO
+
+### Sublime Text
+
+[LSP](https://github.com/tomv564/LSP) (untested)
+
+```json
+"devreplaysvr": {
+    "command": [
+        "devreplay-server",
+        "--studio",
+    ],
+    "enabled": true,
+    "languageId": "python"
+}
+```
 
 ### Emacs
-```elisp
-(lsp-register-client
-    (make-lsp-client :new-connection
-        (lsp-stdio-connection '("R" "--slave" "-e" "languageserver::run()"))
-        :major-modes '(ess-r-mode inferior-ess-r-mode)
-        :server-id 'lsp-R))
-``` -->
+
+[lsp-mode](https://github.com/emacs-lsp/lsp-mode) (untested)
