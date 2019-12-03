@@ -1,6 +1,7 @@
 "use strict";
 
 import { code2String, fixWithPattern, ILintOut, IPattern, lint, makeSeverity } from "devreplay";
+import * as path from "path";
 import {
     CodeAction,
     CodeActionKind,
@@ -69,11 +70,10 @@ function validate(doc: TextDocument) {
 }
 
 function lintFile(doc: TextDocument) {
-    if (workspaceFolder === undefined) {
-        return [];
-    }
+    const docDir = path.dirname(path.normalize(URI.parse(doc.uri).fsPath));
+    const rootPath = (workspaceFolder !== undefined) ? workspaceFolder : docDir;
     const fileContent = doc.getText();
-    const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
+    const ruleFile = URI.parse(`${rootPath}/devreplay.json`).fsPath;
     const fileName = URI.parse(doc.uri).fsPath;
     if (fileName.endsWith(ruleFile) || fileName.endsWith(".git")) {
         return [];
@@ -108,9 +108,6 @@ function setupDocumentsListeners() {
     });
 
     connection.onCodeAction((params) => {
-        if (workspaceFolder === undefined) {
-            return [];
-        }
         const diagnostics = params.context.diagnostics.filter((diag) => diag.source === "devreplay");
         if (diagnostics.length === 0) {
             return [];
@@ -119,7 +116,9 @@ function setupDocumentsListeners() {
         if (textDocument === undefined) {
             return [];
         }
-        const ruleFile = URI.parse(`${workspaceFolder}/devreplay.json`).fsPath;
+        const docDir = path.dirname(path.normalize(URI.parse(textDocument.uri).fsPath));
+        const rootPath = (workspaceFolder !== undefined) ? workspaceFolder : docDir;
+        const ruleFile = URI.parse(`${rootPath}/devreplay.json`).fsPath;
         const codeActions: CodeAction[] = [];
         const results = lint(textDocument.uri, textDocument.getText(), ruleFile);
         diagnostics.forEach((diag) => {
