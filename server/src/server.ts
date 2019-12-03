@@ -136,7 +136,7 @@ function setupDocumentsListeners() {
 }
 
 function createEditByPattern(document: TextDocument, range: Range, pattern: IPattern): WorkspaceEdit {
-    const edits = [TextEdit.replace(range, fixWithPattern(document.getText(range), pattern).replace(/\r?\n|\r/g, ""))];
+    const edits = [TextEdit.replace(range, fixWithPattern(document.getText(range), pattern).slice(0, -1))];
 
     return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
 }

@@ -1,39 +1,36 @@
 # DevReplay Language Server
 
-## Editor Support
-
-* [x] Visual Studio Code
-* [ ] Atom
-* [ ] Sublime Text
-* [x] Vim/NeoVim
-* [ ] Emacs
-
-### Install
+### Installing
 
 ```
 npm install -g devreplay-server
 ```
 
+
+### Running the Language server
+
+```
+devreplay-server --studio
+```
+
+
+
+## Editor Extension Support
+
+* [x] Visual Studio Code
+* [ ] Atom
+* [ ] Sublime Text
+* [ ] Vim/NeoVim
+* [ ] Emacs
+
 ### Visual Studio Code
 
 DevReplay for VS Code is available [here]((https://marketplace.visualstudio.com/items?itemName=Ikuyadeu.devreplay))
 
-### vim and neovim
-
-1. Install `devreplay-server`
-2. Install [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim/blob/next/INSTALL.md)
-3. Add the following to neovim's configuration (the case if you want to use for python and javascript)
-
-```vim
-let g:LanguageClient_serverCommands = {
-    \ 'python': ['devreplay-server', '--studio'],
-    \ 'javascript': ['devreplay-server', '--studio'],
-    \ }
-```
 
 ### Atom IDE
 
-* TODO
+* [Progress](https://github.com/Ikuyadeu/devreplay-atom)
 
 ### Sublime Text
 
@@ -48,6 +45,19 @@ let g:LanguageClient_serverCommands = {
     "enabled": true,
     "languageId": "python"
 }
+```
+
+### vim and neovim
+
+1. Install `devreplay-server`
+2. Install [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim/blob/next/INSTALL.md)
+3. Add the following to neovim's configuration (the case if you want to use for python and javascript)
+
+```vim
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['devreplay-server', '--stdio'],
+    \ 'javascript': ['devreplay-server', '--stdio'],
+    \ }
 ```
 
 ### Emacs
