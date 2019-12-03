@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "DevReplay",
 	"description": "Devreplay for Visual Studio Code",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
