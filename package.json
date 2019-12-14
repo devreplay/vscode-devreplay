@@ -52,7 +52,7 @@
 		"rimraf": "^3.0.0",
 		"ts-loader": "^5.4.5",
 		"typescript": "^3.7.2",
-		"webpack": "^4.39.2",
+		"webpack": "^4.41.2",
 		"webpack-cli": "^3.3.7"
 	}
 }
