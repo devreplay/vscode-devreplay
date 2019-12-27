@@ -123,7 +123,7 @@ function setupDocumentsListeners() {
         const results = lint(textDocument.uri, textDocument.getText(), ruleFile);
         diagnostics.forEach((diag) => {
             const targetRule = results[Number(diag.code)];
-            const title = "Fix by devreplay";
+            const title = "Fix by DevReplay";
             const fixAction = CodeAction.create(title,
                                                 createEditByPattern(textDocument, diag.range, targetRule.pattern),
                                                 CodeActionKind.QuickFix);
@@ -136,9 +136,14 @@ function setupDocumentsListeners() {
 }
 
 function createEditByPattern(document: TextDocument, range: Range, pattern: IPattern): WorkspaceEdit {
-    const edits = [TextEdit.replace(range, fixWithPattern(document.getText(range), pattern).slice(0, -1))];
+    const newText = fixWithPattern(document.getText(range), pattern);
+    if (newText !== undefined) {
+        const edits = [TextEdit.replace(range, newText.slice(0, -1))];
 
-    return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
+        return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
+    }
+
+    return { documentChanges: [] };
 }
 
 function convertSeverity(severity: string) {
