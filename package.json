@@ -17,10 +17,10 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay"
+		"url": "https://github.com/devreplay/vscode-devreplay"
 	},
 	"bugs": {
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay/issues"
+		"url": "https://github.com/devreplay/vscode-devreplay/issues"
 	},
 	"engines": {
 		"vscode": "^1.40.0"

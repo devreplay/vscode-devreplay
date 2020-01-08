@@ -30,7 +30,7 @@ DevReplay for VS Code is available [here]((https://marketplace.visualstudio.com/
 
 ### Atom IDE
 
-* [Progress](https://github.com/Ikuyadeu/devreplay-atom)
+* [Progress](https://github.com/devreplay/devreplay-atom)
 
 ### Sublime Text
 

@@ -8,10 +8,10 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay.git"
+		"url": "https://github.com/devreplay/vscode-devreplay.git"
 	},
 	"bugs": {
-		"url": "https://github.com/Ikuyadeu/vscode-devreplay./issues"
+		"url": "https://github.com/devreplay/vscode-devreplay./issues"
 	},
 	"engines": {
 		"vscode": "^1.38.0"
