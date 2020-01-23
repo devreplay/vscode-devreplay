@@ -48,6 +48,14 @@ export function activate(context: ExtensionContext): void {
             {
                 scheme: "file",
                 language: "c",
+            },
+            {
+                scheme: "file",
+                language: "dart",
+            },
+            {
+                scheme: "file",
+                language: "go",
             }],
         diagnosticCollectionName: "devreplay",
         revealOutputChannelOn: RevealOutputChannelOn.Never,
