@@ -22,14 +22,14 @@
     "url": "https://github.com/devreplay/vscode-devreplay/issues"
   },
   "dependencies": {
-    "vscode-languageserver-textdocument": "^1.0.0-next.5",
-    "vscode-languageserver": "6.0.0-next.8",
+    "vscode-languageserver-textdocument": "^1.0.0",
+    "vscode-languageserver": "6.0.1",
     "devreplay": "^0.3.8",
     "vscode-uri": "^2.1.1"
   },
   "devDependencies": {
-    "tslint": "^5.20.1",
-    "typescript": "^3.7.2"
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
   },
   "scripts": {}
 }
