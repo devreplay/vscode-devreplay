@@ -27,6 +27,10 @@ export function activate(context: ExtensionContext): void {
             },
             {
                 scheme: "file",
+                language: "php",
+            },
+            {
+                scheme: "file",
                 language: "ruby",
             },
             {
