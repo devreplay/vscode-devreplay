@@ -33,7 +33,9 @@ module.exports = function withDefaults(/**@type WebpackConfig*/extConfig) {
 						}
 					}
 				}]
-			}]
+			},
+			{test: /\.json$/, exclude: /node_modules/, use: ['json-loader']},
+		]
 		},
 		externals: {
 			'vscode': 'commonjs vscode', // ignored because it doesn't exist
