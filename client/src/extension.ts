@@ -35,6 +35,10 @@ export function activate(context: ExtensionContext): void {
             },
             {
                 scheme: "file",
+                language: "r",
+            },
+            {
+                scheme: "file",
                 language: "java",
             },
             {
