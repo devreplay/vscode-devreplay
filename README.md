@@ -32,7 +32,7 @@ or
 ```json
 [
     {
-        "extends" ["python"]
+        "extends": ["python"]
     }
 ]
 ```
