@@ -1,6 +1,6 @@
 {
   "name": "devreplay-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Yuki Ueda",
   "description": "Language server for DevReplay",
   "keywords": [
