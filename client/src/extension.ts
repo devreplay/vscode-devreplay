@@ -64,7 +64,20 @@ export function activate(context: ExtensionContext): void {
             {
                 scheme: "file",
                 language: "go",
-            }],
+            },
+            {
+                scheme: "file",
+                language: "rust",
+            },
+            {
+                scheme: "file",
+                language: "csharp",
+            },
+            {
+                scheme: "file",
+                language: "kotlin",
+            }
+        ],
         diagnosticCollectionName: "devreplay",
         revealOutputChannelOn: RevealOutputChannelOn.Never,
     };
