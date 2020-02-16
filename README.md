@@ -3,6 +3,7 @@
 A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
 
 * [Other Editors Support (Language Server)](https://www.npmjs.com/package/devreplay-server)
+* [Atom (Progress)](https://atom.io/packages/atom-devreplay)
 * [Command Line version](https://www.npmjs.com/package/devreplay)
 * [GitHub Application](https://github.com/marketplace/dev-replay)
 * [Auto pattern generator](https://github.com/devreplay/review_pattern_gen)
