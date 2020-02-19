@@ -59,6 +59,10 @@ export function activate(context: ExtensionContext): void {
             },
             {
                 scheme: "file",
+                language: "cobol",
+            },
+            {
+                scheme: "file",
                 language: "dart",
             },
             {
