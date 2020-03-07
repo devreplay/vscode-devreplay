@@ -83,8 +83,8 @@ function lintFile(doc: TextDocument) {
 }
 
 function makeDiagnostic(result: ILintOut, ruleCode: number): Diagnostic {
-    const range: Range = {start: {line: result.position.start - 1, character: 0},
-                          end: {line: result.position.end - 1, character: Number.MAX_VALUE}};
+    const range: Range = {start: {line: result.position.start.line - 1, character: result.position.start.character - 1},
+                          end: {line: result.position.end.line - 1, character: result.position.end.character - 1}};
     const message = code2String(result.pattern);
     const severity = convertSeverity(makeSeverity(result.pattern.severity));
     const diagnostic = Diagnostic.create(range, message, severity, ruleCode, "devreplay");
@@ -138,7 +138,7 @@ function setupDocumentsListeners() {
 function createEditByPattern(document: TextDocument, range: Range, pattern: IPattern): WorkspaceEdit {
     const newText = fixWithPattern(document.getText(range), pattern);
     if (newText !== undefined) {
-        const edits = [TextEdit.replace(range, newText.slice(0, -1))];
+        const edits = [TextEdit.replace(range, newText)];
 
         return { documentChanges: [TextDocumentEdit.create({uri: document.uri, version: document.version}, edits)] };
     }
