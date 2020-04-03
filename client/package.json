@@ -14,12 +14,12 @@
 		"url": "https://github.com/devreplay/vscode-devreplay./issues"
 	},
 	"engines": {
-		"vscode": "^1.41.0"
+		"vscode": "^1.43.0"
 	},
 	"devDependencies": {
-		"@types/vscode": "1.41.0"
+		"@types/vscode": "1.43.0"
 	},
 	"dependencies": {
-		"vscode-languageclient": "6.1.1"
+		"vscode-languageclient": "6.1.3"
 	}
 }
