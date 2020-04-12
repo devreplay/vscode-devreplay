@@ -20,7 +20,7 @@
 			"protocol": "inspector",
 			"port": 6009,
 			"sourceMaps": true,
-			"outFiles": ["${workspaceFolder}/server/out/**/*.js"]
+			"outFiles": ["${workspaceFolder}/client/node_modules/.bin/devreplay-server"]
 		}
 	],
 	"compounds": [
