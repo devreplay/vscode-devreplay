@@ -33,7 +33,7 @@ or
 ```json
 [
     {
-        "extends": ["python"]
+        "extends": ["typescript", "vscode"]
     }
 ]
 ```
@@ -49,6 +49,26 @@ b = tmp
 it will be
 ```python
 a, b = b, a
+```
+
+the rule can be custimized by editing `severity` and `author` like here
+ 
+![howtouse](img/DevReplayReplay.gif)
+```json
+[
+    {
+        "condition": [
+            "tmp = $1",
+            "$1 = $2",
+            "$2 = tmp"
+        ],
+        "consequent": [
+            "$1, $2 = $2, $1"
+        ],
+        "severity": "Info",
+        "author": "Yuki"
+    },
+]
 ```
 
 
@@ -73,4 +93,4 @@ This package is made based on
 * [vscode-tslint](https://github.com/microsoft/vscode-tslint)
 * [vscode-eslint](https://github.com/microsoft/vscode-eslint)
 
-DevReplay is supported by 2019 Exploratory IT Human Resources Project <a href="https://www.ipa.go.jp/jinzai/mitou/portal_index.html">The MITOU Program</a>, Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation, JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
+DevReplay is supported by 2019 Exploratory IT Human Resources Project [The MITOU Program](https://www.ipa.go.jp/jinzai/mitou/portal_index.html), Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation, JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
