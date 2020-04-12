@@ -5,7 +5,7 @@ import { ExtensionContext, window as Window } from "vscode";
 import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, TransportKind } from "vscode-languageclient";
 
 export function activate(context: ExtensionContext): void {
-    const serverModule = context.asAbsolutePath(path.join("client", "node_modules", ".bin", "devreplay-server"));
+    const serverModule = context.asAbsolutePath(path.join("server", "out", "server.js"));
     const debugOptions = { execArgv: ["--nolazy", "--inspect=6009"], cwd: process.cwd() };
     const serverOptions: ServerOptions = {
         run: { module: serverModule, transport: TransportKind.ipc, options: { cwd: process.cwd() } },
