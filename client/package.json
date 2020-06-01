@@ -11,7 +11,7 @@
 		"url": "https://github.com/devreplay/vscode-devreplay.git"
 	},
 	"bugs": {
-		"url": "https://github.com/devreplay/vscode-devreplay./issues"
+		"url": "https://github.com/devreplay/vscode-devreplay/issues"
 	},
 	"engines": {
 		"vscode": "^1.45.1"
