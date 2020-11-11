@@ -5,7 +5,7 @@ import { Pattern, makePatterns, makeDiffObj } from 'devreplay';
 
 import { getDiff } from './diffprovider';
 
-export async function addChange() {
+export async function addChange(ruleSize: number) {
     const targetFile = window.activeTextEditor.document.uri.fsPath;
     const diff = await getDiff(targetFile);
     const patterns = [];
@@ -15,7 +15,9 @@ export async function addChange() {
     for (const out of chunks.filter(chunk => {return chunk.type === 'changed';})) {
         const pattern = await makePatterns(out.deleted.join('\n'),
                                             out.added.join('\n'), source);
-        if (pattern !== undefined) {
+        if (pattern !== undefined &&
+            pattern.before.length <= ruleSize &&
+            pattern.after.length <= ruleSize) {
             patterns.push(pattern);
         }
     }

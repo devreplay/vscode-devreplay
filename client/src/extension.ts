@@ -96,15 +96,17 @@ export function activate(context: ExtensionContext): void {
     }
     client.registerProposedFeatures();
 
+    const config = workspace.getConfiguration('devreplay');
+    const ruleSize = config.get<number>('rule.size');
     workspace.onWillSaveTextDocument((event) => {
         const config = workspace.getConfiguration('devreplay');
         const isExecutable = config.get<boolean>('exec.save');
         if (isExecutable) {
-            addChange();
+            addChange(ruleSize);
         }
     });
 
-    const disposable = commands.registerCommand('devreplay.add', addChange);
+    const disposable = commands.registerCommand('devreplay.add', () => addChange(ruleSize));
 
     context.subscriptions.push(
         client.start(),

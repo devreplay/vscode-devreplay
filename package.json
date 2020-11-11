@@ -67,6 +67,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Add rules when a file is saved"
+				},
+				"devreplay.rule.size": {
+					"type": "integer",
+					"default": 5,
+					"description": "Size of max change lines when making rules"
 				}
 			}
 		}
