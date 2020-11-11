@@ -18,12 +18,12 @@ A Visual Studio Code extension with that will suggest source code fix based on y
 ```json
 [
     {
-        "condition": [
+        "before": [
             "tmp = $1",
             "$1 = $2",
             "$2 = tmp"
         ],
-        "consequent": [
+        "after": [
             "$1, $2 = $2, $1"
         ]
     },
@@ -57,12 +57,12 @@ the rule can be custimized by editing `severity` and `author` like here
 ```json
 [
     {
-        "condition": [
+        "before": [
             "tmp = $1",
             "$1 = $2",
             "$2 = tmp"
         ],
-        "consequent": [
+        "after": [
             "$1, $2 = $2, $1"
         ],
         "severity": "Info",

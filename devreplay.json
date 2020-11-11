@@ -1,63 +1,31 @@
 [
-   {
-       "condition": [
-           "show(${0:column}, ${1:preservalFocus})"
-       ],
-       "consequent": [
-           "show(${1:preservalFocus})"
-       ]
-   },
-   {
-       "condition": [
-           "editor.hide()"
-       ],
-       "consequent": [
-           "workbench.action.closeActiveEditor()"
-       ]
-   },
-   {
-       "condition": [
-           "editor.show(${1:column})"
-       ],
-       "consequent": [
-           "window.showTextDocument()"
-       ]
-   },
-   {
-       "condition": [
-           "MarkedString"
-       ],
-       "consequent": [
-           "MarkdownString"
-       ]
-   },
-   {
-       "condition": [
-           "withScmProgress"
-       ],
-       "consequent": [
-           "withProgress"
-       ]
-   },
-   {
-       "condition": [
-           "const ${0:value} = workspace.rootPath"
-       ],
-       "consequent": [
-           "const folders = workspace.workspaceFolders;",
-           "if (folders === undefined) {",
-           "    return undefined;",
-           "}",
-           "const ${0:value} = folders[0].uri.path;"
-       ],
-       "description": "For the vscode, rootPath should be workspaceFolders"
-   },
-   {
-       "condition": [
-           "scm.inputBox"
-       ],
-       "consequent": [
-           "SourceControl.inputBox"
-       ]
-   }
-]
+    {
+      "before": ["hello"],
+      "after": ["Hello"]
+    },
+    {
+      "before": [
+          "for ${1:Name} in range($0):"
+      ],
+      "after": [
+          "import six",
+          "for ${1:Name} in six.moves.range($0):"
+      ],
+      "message": "Python2互換のためsixを使用してください",
+      "severity": "Warning"
+    },
+    {
+      "before": [
+        "tmp = $1",
+        "$1 = $2",
+        "$2 = tmp"
+      ],
+      "after": [
+        "$1, $2 = $2, $1"
+      ],
+      "author": "Yuki Ueda",
+      "message": "Value exchanging can be one line",
+      "severity": "Information"
+    }
+  ]
+  
