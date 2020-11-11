@@ -1,3 +1,8 @@
+## v1.5.0
+
+* Update devreplay
+* Add `make rule` function
+
 ## v1.2.0
 
 * Update devreplay
