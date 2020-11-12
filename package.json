@@ -42,7 +42,7 @@
 		"commands": [
 			{
 				"title": "Add rules from latest change",
-				"category": "devreplay",
+				"category": "DevReplay",
 				"command": "devreplay.add",
 				"icon": {
 					"light": "./img/icon.png",

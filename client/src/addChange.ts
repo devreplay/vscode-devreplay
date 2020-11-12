@@ -1,20 +1,22 @@
 import { join } from 'path';
 import * as fs from 'fs';
 import { window, workspace } from 'vscode';
-import { Pattern, makePatterns, makeDiffObj } from 'devreplay';
+import { Pattern, makeDiffObj, makePatterns } from 'devreplay';
 
 import { getDiff } from './diffprovider';
 
 export async function addChange(ruleSize: number) {
     const targetFile = window.activeTextEditor.document.uri.fsPath;
+    const source = getFileSource(targetFile);
     const diff = await getDiff(targetFile);
-    const patterns = [];
-    const source = getFileSource(targetFile.toString());
 
+    const rootPath = workspace.getWorkspaceFolder(window.activeTextEditor.document.uri).uri.fsPath;
+
+    const patterns: Pattern[] = [];
     const chunks = makeDiffObj(diff).filter(chunk => {return chunk.type === 'changed';});
     for (const out of chunks.filter(chunk => {return chunk.type === 'changed';})) {
         const pattern = await makePatterns(out.deleted.join('\n'),
-                                            out.added.join('\n'), source);
+                                           out.added.join('\n'), source);
         if (pattern !== undefined &&
             pattern.before.length <= ruleSize &&
             pattern.after.length <= ruleSize) {
@@ -22,14 +24,14 @@ export async function addChange(ruleSize: number) {
         }
     }
 
-    writePattern(patterns);
+    writePattern(rootPath, patterns);
 }
 
 
-export function writePattern(patterns: any[]) {
-    const outPatterns = readCurrentPattern().concat(patterns);
+export function writePattern(rootPath: string, patterns: Pattern[]) {
+    const outPatterns = readCurrentPattern(rootPath).concat(patterns);
     const patternStr = JSON.stringify(outPatterns, undefined, 2);
-    const filePath = getDevReplayPath();
+    const filePath = getDevReplayPath(rootPath);
     try {
         fs.writeFileSync(filePath, patternStr);
     } catch(err) {
@@ -38,8 +40,8 @@ export function writePattern(patterns: any[]) {
 }
 
 
-function readCurrentPattern(): Pattern[] {
-    const devreplayPath = getDevReplayPath();
+function readCurrentPattern(rootPath: string): Pattern[] {
+    const devreplayPath = getDevReplayPath(rootPath);
     if (devreplayPath === undefined) { return []; }
     let fileContents = undefined;
     try{
@@ -54,17 +56,15 @@ function readCurrentPattern(): Pattern[] {
 }
 
 
-function getDevReplayPath() {
-    if (workspace.workspaceFolders === undefined) { return undefined; }
-    const root = workspace.workspaceFolders[0].uri.path;
-    return join(root, 'devreplay.json');
+function getDevReplayPath(rootPath: string) {
+    return join(rootPath, 'devreplay.json');
 }
 
 export function tryReadFile(filename: string) {
     if (!fs.existsSync(filename)) {
         throw new Error(`Unable to open file: ${filename}`);
     }
-    const buffer = Buffer.allocUnsafe(256);
+    const buffer = Buffer.alloc(256);
     const fd = fs.openSync(filename, 'r');
     try {
         fs.readSync(fd, buffer, 0, 256, 0);
