@@ -1,11 +1,12 @@
 import { workspace, extensions } from 'vscode';
-import { GitExtension } from '../typings/git'; 
+import { GitExtension, API } from '../typings/git'; 
 
-export function getGitAPI() {
+export function getGitAPI(): API | undefined {
     const gitExtension = extensions.getExtension<GitExtension>('vscode.git');
     if (gitExtension) {
         return gitExtension.exports.getAPI(1);
     }
+    return;
 }
 
 export function getRepo() {

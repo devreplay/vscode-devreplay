@@ -5,12 +5,23 @@ import { Pattern, makeDiffObj, makePatterns } from 'devreplay';
 
 import { getDiff } from './diffprovider';
 
-export async function addChange(ruleSize: number) {
-    const targetFile = window.activeTextEditor.document.uri.fsPath;
+export async function addChange() {
+    const config = workspace.getConfiguration('devreplay');
+    let ruleSize = config.get<number>('rule.size');
+    if (ruleSize === undefined) {
+        ruleSize = 1;
+    }
+    const activeTextEditor = window.activeTextEditor;
+    if (activeTextEditor === undefined) {
+        return;
+    }
+    const targetFile = activeTextEditor.document.uri.fsPath;
     const source = getFileSource(targetFile);
     const diff = await getDiff(targetFile);
-
-    const rootPath = workspace.getWorkspaceFolder(window.activeTextEditor.document.uri).uri.fsPath;
+    const workspaceFolder = workspace.getWorkspaceFolder(activeTextEditor.document.uri);
+    if (workspaceFolder === undefined) {
+        return;
+    }
 
     const patterns: Pattern[] = [];
     const chunks = makeDiffObj(diff).filter(chunk => {return chunk.type === 'changed';});
@@ -24,7 +35,7 @@ export async function addChange(ruleSize: number) {
         }
     }
 
-    writePattern(rootPath, patterns);
+    writePattern(workspaceFolder.uri.fsPath, patterns);
 }
 
 
@@ -64,7 +75,7 @@ export function tryReadFile(filename: string) {
     if (!fs.existsSync(filename)) {
         throw new Error(`Unable to open file: ${filename}`);
     }
-    const buffer = Buffer.alloc(256);
+    const buffer = Buffer.allocUnsafe(256);
     const fd = fs.openSync(filename, 'r');
     try {
         fs.readSync(fd, buffer, 0, 256, 0);

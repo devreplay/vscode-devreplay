@@ -1,11 +1,12 @@
 'use strict';
-import * as path from 'path';
-import { ExtensionContext, window, workspace, commands } from 'vscode';
+import { join } from 'path';
+
+import { ExtensionContext, window, commands } from 'vscode';
 import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, TransportKind } from 'vscode-languageclient';
 import { addChange } from './addChange';
 
 export function activate(context: ExtensionContext): void {
-    const serverModule = context.asAbsolutePath(path.join('server', 'out', 'server.js'));
+    const serverModule = context.asAbsolutePath(join('server', 'out', 'server.js'));
     const debugOptions = { execArgv: ['--nolazy', '--inspect=6009'], cwd: process.cwd() };
     const serverOptions: ServerOptions = {
         run: { module: serverModule, transport: TransportKind.ipc, options: { cwd: process.cwd() } },
@@ -96,18 +97,19 @@ export function activate(context: ExtensionContext): void {
     }
     client.registerProposedFeatures();
 
-    const config = workspace.getConfiguration('devreplay');
-    const ruleSize = config.get<number>('rule.size');
-    workspace.onWillSaveTextDocument((event) => {
-        const isExecutable = config.get<boolean>('exec.save');
-        if (isExecutable) {
-            addChange(ruleSize);
-        }
-    });
+    // const config = workspace.getConfiguration('devreplay');
 
+    const registeredCommand = commands.registerCommand('devreplay.add', () => { addChange(); } );
+    // workspace.onWillSaveTextDocument((_event) => {
+    //     const isExecutable = config.get<boolean>('exec.save');
+    //     if (isExecutable) {
+    //         addChange();
+    //     }
+    // });
 
     context.subscriptions.push(
         client.start(),
-        commands.registerCommand('devreplay.add', () => addChange(ruleSize))
+        registeredCommand
     );
 }
+
