@@ -21,7 +21,7 @@
 		"vscode-test": "1.5.1"
 	},
 	"dependencies": {
-		"devreplay": "1.9.26",
+		"devreplay": "1.9.27",
 		"vscode-languageclient": "7.0.0"
 	}
 }
