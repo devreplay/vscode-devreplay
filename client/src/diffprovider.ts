@@ -2,40 +2,40 @@ import { workspace, extensions } from 'vscode';
 import { GitExtension, API } from '../typings/git'; 
 
 export function getGitAPI(): API | undefined {
-    const gitExtension = extensions.getExtension<GitExtension>('vscode.git');
-    if (gitExtension) {
-        return gitExtension.exports.getAPI(1);
-    }
-    return;
+	const gitExtension = extensions.getExtension<GitExtension>('vscode.git');
+	if (gitExtension) {
+		return gitExtension.exports.getAPI(1);
+	}
+	return;
 }
 
 export function getRepo() {
-    const git = getGitAPI();
-    if (!git) {
-        throw new Error('vscode.git is no enabled');
-    }
-    // get root path
-    const { rootPath } = workspace;
-    if (!rootPath) {
-        throw new Error('Please open a folder.');
-    }
+	const git = getGitAPI();
+	if (!git) {
+		throw new Error('vscode.git is no enabled');
+	}
+	// get root path
+	const { rootPath } = workspace;
+	if (!rootPath) {
+		throw new Error('Please open a folder.');
+	}
 
-    const [repo] = git.repositories
-    .filter(function (repo) {
-      return rootPath.startsWith(repo.rootUri.fsPath);
-    })
-    .sort(function (prev, next) {
-      return next.rootUri.fsPath.length - prev.rootUri.fsPath.length;
-    });
-    if (!repo) {
-        throw new Error(`repo not found in path: ${rootPath}`);
-    }
-    return repo;
+	const [repo] = git.repositories
+		.filter(function (repo) {
+			return rootPath.startsWith(repo.rootUri.fsPath);
+		})
+		.sort(function (prev, next) {
+			return next.rootUri.fsPath.length - prev.rootUri.fsPath.length;
+		});
+	if (!repo) {
+		throw new Error(`repo not found in path: ${rootPath}`);
+	}
+	return repo;
 }
 
 export function getDiff(filePath: string) {
-    const repo = getRepo();
-    return repo.diffWithHEAD(filePath);
+	const repo = getRepo();
+	return repo.diffWithHEAD(filePath);
 }
 
 // export async function getDiff() {

@@ -2,7 +2,7 @@
 import { join } from 'path';
 
 import { ExtensionContext, window, commands } from 'vscode';
-import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, TransportKind } from 'vscode-languageclient';
+import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 import { addChange } from './addChange';
 
 export function activate(context: ExtensionContext): void {

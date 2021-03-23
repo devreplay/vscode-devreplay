@@ -1,7 +1,7 @@
 import { join } from 'path';
 import * as fs from 'fs';
 import { window, workspace } from 'vscode';
-import { Pattern, makeDiffObj, makePatterns } from 'devreplay';
+import { Rule, makeDiffObj, makeRules } from 'devreplay';
 
 import { getDiff } from './diffprovider';
 
@@ -23,24 +23,24 @@ export async function addChange() {
         return;
     }
 
-    const patterns: Pattern[] = [];
+    const rules: Rule[] = [];
     const chunks = makeDiffObj(diff).filter(chunk => {return chunk.type === 'changed';});
     for (const out of chunks.filter(chunk => {return chunk.type === 'changed';})) {
-        const pattern = await makePatterns(out.deleted.join('\n'),
-                                           out.added.join('\n'), source);
+        const pattern = await makeRules(out.deleted.join('\n'),
+                                        out.added.join('\n'), source);
         if (pattern !== undefined &&
             pattern.before.length <= ruleSize &&
             pattern.after.length <= ruleSize) {
-            patterns.push(pattern);
+            rules.push(pattern);
         }
     }
 
-    writePattern(workspaceFolder.uri.fsPath, patterns);
+    writePattern(workspaceFolder.uri.fsPath, rules);
 }
 
 
-export function writePattern(rootPath: string, patterns: Pattern[]) {
-    const outPatterns = readCurrentPattern(rootPath).concat(patterns);
+export function writePattern(rootPath: string, rules: Rule[]) {
+    const outPatterns = readCurrentPattern(rootPath).concat(rules);
     const patternStr = JSON.stringify(outPatterns, undefined, 2);
     const filePath = getDevReplayPath(rootPath);
     try {
@@ -51,7 +51,7 @@ export function writePattern(rootPath: string, patterns: Pattern[]) {
 }
 
 
-function readCurrentPattern(rootPath: string): Pattern[] {
+function readCurrentPattern(rootPath: string): Rule[] {
     const devreplayPath = getDevReplayPath(rootPath);
     if (devreplayPath === undefined) { return []; }
     let fileContents = undefined;
@@ -63,7 +63,7 @@ function readCurrentPattern(rootPath: string): Pattern[] {
     if (fileContents === undefined) {
         return [];
     }
-    return JSON.parse(fileContents) as Pattern[];
+    return JSON.parse(fileContents) as Rule[];
 }
 
 
