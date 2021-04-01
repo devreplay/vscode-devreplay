@@ -14,17 +14,5 @@
       "message": "Python2互換のためsixを使用してください",
       "severity": "Warning"
     },
-    {
-      "before": [
-        "tmp = $1",
-        "$1 = $2",
-        "$2 = tmp"
-      ],
-      "after": [
-        "$1, $2 = $2, $1"
-      ],
-      "author": "Yuki Ueda",
-      "message": "Value exchanging can be one line",
-      "severity": "Information"
-    }
+    "typescript"
 ]
