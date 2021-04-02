@@ -4,4 +4,4 @@ print("Hello world")
 
 tmp = a
 a = b
-b = a
+b = tmp
