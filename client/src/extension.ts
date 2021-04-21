@@ -24,6 +24,10 @@ export function activate(context: ExtensionContext): void {
 			},
 			{
 				scheme: 'file',
+				language: 'markdown',
+			},
+			{
+				scheme: 'file',
 				language: 'python',
 			},
 			{
