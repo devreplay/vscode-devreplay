@@ -1,8 +1,10 @@
 import { join } from 'path';
 import * as fs from 'fs';
 import { window, workspace } from 'vscode';
-import { Rule, makeDiffObj, makeRules } from 'devreplay';
+import { Rule } from 'devreplay';
 
+import { makeRulesFromDiff } from './rule-maker/makeRules';
+import { getFileSource } from './extensionmap';
 import { getDiff } from './diffprovider';
 
 export async function addChange() {
@@ -23,17 +25,7 @@ export async function addChange() {
 		return;
 	}
 
-	const rules: Rule[] = [];
-	const chunks = makeDiffObj(diff).filter(chunk => {return chunk.type === 'changed';});
-	for (const out of chunks.filter(chunk => {return chunk.type === 'changed';})) {
-		const pattern = await makeRules(out.deleted.join('\n'),
-			out.added.join('\n'), source);
-		if (pattern !== undefined &&
-            pattern.before.length <= ruleSize &&
-            pattern.after.length <= ruleSize) {
-			rules.push(pattern);
-		}
-	}
+	const rules = await makeRulesFromDiff(diff, source);
 
 	writePattern(workspaceFolder.uri.fsPath, rules);
 }
@@ -89,39 +81,4 @@ export function tryReadFile(filename: string) {
 	}
 
 	return fs.readFileSync(filename, 'utf8');
-}
-
-
-interface IGrammarPath {
-    [key: string]: string[];
-}
-
-export const grammarPaths: IGrammarPath = {
-	'source.c': ['.c'],
-	'source.cpp': ['.cpp'],
-	'source.csharp': ['.cs'],
-	'source.go': ['.go'],
-	'source.html': ['.html'],
-	'source.java': ['.java'],
-	'source.js': ['.js'],
-	'source.perl': ['.perl'],
-	'source.perl.6': ['.perl6'],
-	'source.php': ['.php'],
-	'source.python': ['.py'],
-	'source.r': ['.r'],
-	'source.ruby': ['.ruby'],
-	'source.rust': ['.rs'],
-	'source.swift': ['.swift'],
-	'source.ts': ['.ts']
-};
-
-export function getFileSource(path: string) {
-	for (const grammarPath in grammarPaths) {
-		for (const extension of grammarPaths[grammarPath]) {
-			if (path.endsWith(extension)){
-				return grammarPath;
-			}
-		}
-	}
-	return undefined;
 }
