@@ -21,7 +21,7 @@
 		"vscode-test": "1.5.2"
 	},
 	"dependencies": {
-		"devreplay": "1.9.29",
+		"devreplay": "1.9.32",
 		"parse-diff": "^0.8.1",
 		"simple-git": "2.42.0",
 		"text-table": "0.2.0",
