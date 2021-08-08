@@ -2,7 +2,6 @@ import { tokenize, Token, strDiff2treeDiff } from './code-parser';
 import { Rule } from 'devreplay';
 import { Chunk, makeDiffObj } from './diffparser';
 import { DetailedDiff } from './gitMiner';
-import { window } from 'vscode';
 
 /** Token identifier */
 export interface Identifier {
@@ -109,14 +108,7 @@ export async function makeRulesFromChunk(chunk: Chunk): Promise<Rule | undefined
  * @param source Source code language
  */
 export async function makeRules(deletedContents: string, addedContents: string, source: string): Promise<Rule|undefined> {
-	window.showInformationMessage(deletedContents);
-	window.showInformationMessage(addedContents);
-	
 	const change = await strDiff2treeDiff(deletedContents, addedContents, source);
-	window.showInformationMessage(`${change}`);
-
-	window.showInformationMessage(`${change.before.join('\n')}`);
-	window.showInformationMessage(`${change.after.join('\n')}`);
 
 	if (change === undefined) {
 		return;
@@ -146,13 +138,27 @@ function makeCommonIdentifiers(tokens: Token[], tokens2: Token[]): string[] {
 function tokens2Rules(before: Token[], after: Token[], commonIdentifiers: string[]): Rule {
 
 	let beforeStr = '';
+	let beforeRule: string[] = [];
 	const usedIdentifiers: string[] = [];
-	let prevColumn = undefined;
+	let prevRow = Infinity;
+	let prevColumn = Infinity;
 
 	for (const token of before) {
-		if (prevColumn === undefined) {
+		if (prevRow === Infinity) {
+			prevRow = token.range.start.row;
 			prevColumn = token.range.start.column;
 		}
+		if (prevColumn === Infinity) {
+			prevColumn = token.range.start.column;
+		}
+
+		const rowDiff = token.range.start.row - prevRow;
+		if (rowDiff > 0) {
+			beforeRule.push(beforeStr);
+			beforeStr = '';
+		}
+		prevRow = token.range.end.row;
+
 		const columnDiff = token.range.start.column - prevColumn;
 		if (columnDiff > 0) {
 			beforeStr += '\\s*';
@@ -170,13 +176,27 @@ function tokens2Rules(before: Token[], after: Token[], commonIdentifiers: string
 			beforeStr += escapeRegExpCharacters(token.text);
 		}
 	}
+	beforeRule.push(beforeStr);
 
+	let afterRule: string[] = [];
 	let afterStr = '';
-	prevColumn = undefined;
+	prevRow = Infinity;
+	prevColumn = Infinity;
 	for (const token of after) {
-		if (prevColumn === undefined) {
+		if (prevRow === Infinity) {
+			prevRow = token.range.start.row;
 			prevColumn = token.range.start.column;
 		}
+		if (prevColumn === Infinity) {
+			prevColumn = token.range.start.column;
+		}
+
+		const rowDiff = token.range.start.row - prevRow;
+		if (rowDiff > 0) {
+			afterRule.push(afterStr);
+			afterStr = '';
+		}
+		prevRow = token.range.end.row;
 		const columnDiff = token.range.start.column - prevColumn;
 		if (columnDiff > 0) {
 			afterStr += ' '.repeat(columnDiff);
@@ -189,13 +209,12 @@ function tokens2Rules(before: Token[], after: Token[], commonIdentifiers: string
 		} else {
 			afterStr += token.text;
 		}
-
 	}
-
+	afterRule.push(afterStr);
 
 	return {
-		before: beforeStr,
-		after: afterStr,
+		before: beforeRule.length === 1 ? beforeStr : beforeRule,
+		after: afterRule.length === 1 ? afterStr : afterRule,
 		isRegex: true,
 		matchCase: true
 	};

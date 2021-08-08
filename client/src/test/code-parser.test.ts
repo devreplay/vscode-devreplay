@@ -43,14 +43,14 @@ test('Test tokenizer', async () => {
 	const sourceCode = 'a * b + c / d';        
 	const expectedTokens: string[] = sourceCode.split(' ');
 	const tokens = await tokenize(sourceCode, 'JavaScript');
-	assert.strictEqual(tokens.map(x => x.text), expectedTokens);
+	assert.deepStrictEqual(tokens.map(x => x.text), expectedTokens);
 });
 
 test('Test tokenizer2', async () => {
 	const sourceCode = 'abc+cde';        
 	const expectedTokens: string[] = ['abc', '+', 'cde'];
 	const tokens = await tokenize(sourceCode, 'JavaScript');
-	assert.strictEqual(tokens.map(x => x.text), expectedTokens);
+	assert.deepStrictEqual(tokens.map(x => x.text), expectedTokens);
 });
 
 
@@ -61,7 +61,7 @@ test('Test javascript if statement', async () => {
 		before: ['a == 0'],
 		after: ['a == 0 && b == 1']
 	};
-	assert.strictEqual(await strDiff2treeDiff(sourceCode, newSourceCode, 'JavaScript'), expectedChange);
+	assert.deepStrictEqual(await strDiff2treeDiff(sourceCode, newSourceCode, 'JavaScript'), expectedChange);
 });
 
 
@@ -73,7 +73,7 @@ test('Test java plus statement', async () => {
 		after: ['abc + defg']
 	};
 
-	assert.strictEqual(await strDiff2treeDiff(sourceCode, newSourceCode, 'Java'), expectedChange);
+	assert.deepStrictEqual(await strDiff2treeDiff(sourceCode, newSourceCode, 'Java'), expectedChange);
 });
 
 test('Test javascript tokens', async () => {
@@ -83,24 +83,24 @@ test('Test javascript tokens', async () => {
 
 	const tokens = await tokenize(sourceCode, 'JavaScript');
 
-	assert.strictEqual(tokens.map(x => x.text), expectedTokens);
-	assert.strictEqual(tokens.map(x => x.type), expectedTypes);
+	assert.deepStrictEqual(tokens.map(x => x.text), expectedTokens);
+	assert.deepStrictEqual(tokens.map(x => x.type), expectedTypes);
 
 });
 
-test('Test javascript tokens', async () => {
+test('Test javascript tokens2', async () => {
 	const sourceCode = 'var a = abc+0+\'hello\'+0'; 
 	const expectedTokens: string[] = ['var', 'a', '=', 'abc', '+', '0', '+', '\'hello\'', '+', '0'];
 	const expectedTypes: string[] = ['var', 'identifier', '=', 'identifier', '+', 'number', '+', 'string', '+', 'number'];
 
 	const tokens = await tokenize(sourceCode, 'JavaScript');
 
-	assert.strictEqual(tokens.map(x => x.text), expectedTokens);
-	assert.strictEqual(tokens.map(x => x.type), expectedTypes); 
+	assert.deepStrictEqual(tokens.map(x => x.text), expectedTokens);
+	assert.deepStrictEqual(tokens.map(x => x.type), expectedTypes); 
 });
 
 
-test('Test Multiple tokens', async () => {
+test('Test Python exchange statement', async () => {
 	const sourceCode = [
 		'tmp = b',
 		'b = a',
@@ -110,6 +110,26 @@ test('Test Multiple tokens', async () => {
 		'tmp', '=', 'b',
 		'b', '=', 'a',
 		'a', '=', 'tmp'];
-	const tokens = await tokenize(sourceCode, 'JavaScript');
-	assert.strictEqual(tokens.map(x => x.text), expectedTokens);
+	const tokens = await tokenize(sourceCode, 'Python');
+	assert.deepStrictEqual(tokens.map(x => x.text), expectedTokens);
+});
+
+test('Test Python exchange statement2', async () => { 
+	const sourceCode = [
+		'tmp = b',
+		'b = a',
+		'a = tmp'
+	].join('\n');
+	const newSourceCode = 'a, b = b, a';
+	const expectedChange = {
+		before: [
+			'tmp = b',
+			'b = a',
+			'a = tmp'
+		],
+		after: ['a, b = b, a']
+	};
+	const result = await strDiff2treeDiff(sourceCode, newSourceCode, 'Python');
+
+	assert.deepStrictEqual(result, expectedChange);
 });

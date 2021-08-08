@@ -63,23 +63,23 @@ test('Test rule maker4', async () => {
 	assert.strictEqual(fixWithRules(before, [rule]), after);
 });
 
-test('Test Multiple tokens', async () => {
+test('Test Multiple tokens rule generate', async () => {
 	const before = [
-		'tmp = b',
-		'b = a',
-		'a = tmp'
+		'tmp = a',
+		'a = b',
+		'b = tmp'
 	].join('\n');
 	const after = 'a, b = b, a';
 	const beforeRegex = [
-	    'tmp\\s*=\\s*(?<b>\\w+)', 
-	    '\\k<b>\\s*=\\s*(?<a>\\w+)',
-	    '\\k<a>\\s*=\\s*tmp'];
+	    'tmp\\s*=\\s*(?<a>\\w+)', 
+	    '\\k<a>\\s*=\\s*(?<b>\\w+)',
+	    '\\k<b>\\s*=\\s*tmp'];
 	const afterRegex = '$1, $2 = $2, $1';
 	const rule = await makeRules(before, after, 'javascript');
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	// assert.strictEqual(rule.before, beforeRegex);
+	assert.deepStrictEqual(rule.before, beforeRegex);
 	assert.strictEqual(rule.after, afterRegex);
 	assert.strictEqual(fixWithRules(before, [rule]), after);
 });

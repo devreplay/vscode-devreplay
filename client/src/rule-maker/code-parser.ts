@@ -1,7 +1,6 @@
 import * as Path from 'path';
 import * as Parser from 'web-tree-sitter';
 import { diffChars, diffLines, Change as DiffChange } from 'diff';
-import { window } from 'vscode';
 
 export interface Position {
     row: number;
@@ -102,43 +101,45 @@ export async function strDiff2treeDiff(before: string, after: string, langName: 
 	}
 
 	const beforeTree = parser.parse(before);
-	const tree = editTree(before, after, beforeTree);
-	const afterTree = parser.parse(after, tree);
-	const changedRanges = tree.getChangedRanges(afterTree);
-	const afterRanges = changedRanges.map(x => {
-		return after.slice(x.startIndex, x.endIndex);
-	});
+	const before2afterTree = editTree(before, after, beforeTree);
+	const afterTree = parser.parse(after, before2afterTree);
+	const changedRanges = before2afterTree.getChangedRanges(afterTree);
+	const afterRange = {
+		start: Math.min(...changedRanges.map(change => {
+			return change.startIndex;
+		})),
+		end: Math.max(...changedRanges.map(change => {
+			return change.endIndex;
+		}))
+	};
 
 	const afterTree2 = parser.parse(after);
-	const tree2 = editTree(after, before, afterTree2);
-	const beforeTree2 = parser.parse(before, tree2);
-	const changedRanges2 = tree2.getChangedRanges(beforeTree2);
-	const beforeRanges = changedRanges2.map(x => {
-		return before.slice(x.startIndex, x.endIndex);
-	});
+	const after2beforeTree = editTree(after, before, afterTree2);
+	const beforeTree2 = parser.parse(before, after2beforeTree);
+	const changedRanges2 = after2beforeTree.getChangedRanges(beforeTree2);
+	const beforeRange = {
+		start: Math.min(...changedRanges2.map(change => {
+			return change.startIndex;
+		})),
+		end: Math.max(...changedRanges2.map(change => {
+			return change.endIndex;
+		}))
+	};
 
-	if (beforeRanges.length !== 0 && afterRanges.length !== 0) {
-		const change: Change = {
-			before:  beforeRanges,
-			after: afterRanges
-		};
-		return change;
-	}
+	const afterChunk = after.slice(afterRange.start, afterRange.end);
+	const beforeChunk = before.slice(beforeRange.start, beforeRange.end);
 
 	return {
-		before:  beforeRanges,
-		after: afterRanges
+		before:  beforeChunk.split('\n'),
+		after: afterChunk.split('\n')
 	};
 }
 
 
 export async function makeParser(langName: string): Promise<Parser | undefined> {
-	window.showInformationMessage(`Parser init`);
 	await Parser.init();
-	window.showInformationMessage(`Parser making`);
 	const parser = new Parser();
 	const language = langName2Parser(langName);
-	window.showInformationMessage(Path.join(__dirname, `/../../../wasms/tree-sitter-${language}.wasm`));
 
 	if (language === undefined) {
 		return;
