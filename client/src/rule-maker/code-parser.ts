@@ -1,5 +1,6 @@
 import * as Path from 'path';
 import * as Parser from 'web-tree-sitter';
+
 import { diffChars, diffLines, Change as DiffChange } from 'diff';
 
 export interface Position {
@@ -136,16 +137,13 @@ export async function strDiff2treeDiff(before: string, after: string, langName: 
 }
 
 
-export async function makeParser(langName: string): Promise<Parser | undefined> {
-	await Parser.init();
-	const parser = new Parser();
+export async function makeParser(langName: string): Promise<any> {
 	const language = langName2Parser(langName);
+	const wasmPath = Path.join(__dirname, `/../../wasms/tree-sitter-${language}.wasm`);
 
-	if (language === undefined) {
-		return;
-	}
-	const wasmPath = Path.relative(process.cwd(), Path.join(__dirname, `/../../../wasms/tree-sitter-${language}.wasm`));
+	await Parser.init();
 	const lang = await Parser.Language.load(wasmPath);
+	const parser = new Parser();
 	parser.setLanguage(lang);
 
 	return parser;

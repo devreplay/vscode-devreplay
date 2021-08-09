@@ -29,7 +29,9 @@ A Visual Studio Code extension with that will suggest source code fix based on y
     },
 ]
 ```
+
 or
+
 ```json
 [
     {
@@ -37,23 +39,27 @@ or
     }
 ]
 ```
+
 or
 Use [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) that generate your rule file automatically
 
 If you write the following code,
+
 ```python
 tmp = a
 a = b
 b = tmp
 ```
+
 it will be
+
 ```python
 a, b = b, a
 ```
 
 the rule can be custimized by editing `severity` and `author` like here
- 
 ![howtouse](img/DevReplayReplay.gif)
+
 ```json
 [
     {
@@ -71,7 +77,6 @@ the rule can be custimized by editing `severity` and `author` like here
 ]
 ```
 
-
 ## Supported Language
 
 * CPP
@@ -86,11 +91,6 @@ the rule can be custimized by editing `severity` and `author` like here
 * TypeScript
 * Plain Text
 
+## Acknowledgements
 
-## Thanks
-
-This package is made based on
-* [vscode-tslint](https://github.com/microsoft/vscode-tslint)
-* [vscode-eslint](https://github.com/microsoft/vscode-eslint)
-
-DevReplay is supported by 2019 Exploratory IT Human Resources Project [The MITOU Program](https://www.ipa.go.jp/jinzai/mitou/portal_index.html), Support Center for Advanced Telecommunications (SCAT) Technology Research, Foundation, JSPS KAKENHI Grant Numbers JP18H03222, JP17H00731, JP15H02683, and JP18KT0013.
+DevReplay is supported by 2019 Exploratory IT Human Resources Project [The MITOU Program](https://www.ipa.go.jp/jinzai/mitou/portal_index.html).
