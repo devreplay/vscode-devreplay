@@ -1,3 +1,10 @@
+# Change log
+
+## v1.6.0
+
+* Renew the rule format
+* Fix `make rule` function
+
 ## v1.5.0
 
 * Update devreplay

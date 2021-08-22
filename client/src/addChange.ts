@@ -60,7 +60,7 @@ function readCurrentPattern(rootPath: string): Rule[] {
 
 
 function getDevReplayPath(rootPath: string) {
-	return join(rootPath, 'devreplay.json');
+	return join(rootPath, '.devreplay.json');
 }
 
 export function tryReadFile(filename: string) {

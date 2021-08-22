@@ -1,47 +1,59 @@
 # DevReplay for Visual Studio Code
 
-A Visual Studio Code extension with that will suggest source code fix based on your own rule file.
+A Visual Studio Code extension with that will suggest source code fix based on your regular expressions.
 
 * [Other Editors Support (Language Server)](https://www.npmjs.com/package/devreplay-server)
 * [Atom (Progress)](https://atom.io/packages/atom-devreplay)
 * [Command Line version](https://www.npmjs.com/package/devreplay)
 * [GitHub Application](https://github.com/marketplace/dev-replay)
-* [Auto pattern generator](https://github.com/devreplay/review_pattern_gen)
 
-![howtouse](img/sample.gif)
+![howtouse](img/usage.gif)
 
 ## Quick start
 
 0. Install this extension!
-1. Create your own programming pattern(`devreplay.json`) on the root like bellow
+1. Create your own programming pattern(`.devreplay.json`) on the root like bellow
 
 ```json
 [
-    {
-        "before": [
-            "tmp = $1",
-            "$1 = $2",
-            "$2 = tmp"
-        ],
-        "after": [
-            "$1, $2 = $2, $1"
-        ]
-    },
+  {
+    "before": [
+      "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
+      "\\k<a>\\s*=\\s*(?<b>.+)",
+      "\\k<b>\\s*=\\s*\\k<tmp>"
+    ],
+    "after": [
+      "$2, $3 = $3, $2"
+    ],
+    "isRegex": true
+  }
 ]
 ```
 
-or
+or You can chose the your programming language and framework.
 
 ```json
 [
-    {
-        "extends": ["typescript", "vscode"]
-    }
+    "python"
 ]
 ```
 
-or
-Use [Review Pattern Generator](https://github.com/Ikuyadeu/review_pattern_gen) that generate your rule file automatically
+Following languages and Frameworks are supported.
+
+| Languages  | Frameworks      |
+|------------|-----------------|
+| C          | Android         |
+| CPP        | Angular         |
+| Cobol      | chainer2pytouch |
+| Dart       | Rails           |
+| Java       | React           |
+| JavaScript | TensorFlow      |
+| PHP        |                 |
+| Python     |                 |
+| Ruby       |                 |
+| TypeScript |                 |
+| VS Code    |                 |
+| Vue        |                 |
 
 If you write the following code,
 
@@ -57,37 +69,34 @@ it will be
 a, b = b, a
 ```
 
-the rule can be custimized by editing `severity` and `author` like here
+the display messages can be custimized by editing `severity`, `author` and `message` like here
 ![howtouse](img/DevReplayReplay.gif)
 
 ```json
 [
-    {
+        {
         "before": [
-            "tmp = $1",
-            "$1 = $2",
-            "$2 = tmp"
+        "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
+        "\\k<a>\\s*=\\s*(?<b>.+)",
+        "\\k<b>\\s*=\\s*\\k<tmp>"
         ],
         "after": [
-            "$1, $2 = $2, $1"
+        "$2, $3 = $3, $2"
         ],
+        "isRegex": true,
         "severity": "Info",
-        "author": "Yuki"
+        "author": "Yuki",
+        "message": "Value exchanging can be one line"
     },
 ]
 ```
 
 ## Supported Language
 
-* CPP
-* Dart
-* Go
+* C/CPP
 * Java
-* JavsScript
-* PHP
 * Python
-* R
-* Ruby
+* JavsScript
 * TypeScript
 * Plain Text
 

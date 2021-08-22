@@ -90,7 +90,7 @@ export function activate(context: ExtensionContext): void {
 		synchronize: {
 			// configurationSection: 'devreplay',
 			fileEvents: [
-				workspace.createFileSystemWatcher('**/devreplay.json')
+				workspace.createFileSystemWatcher('**/.devreplay.json')
 			]
 		},
 		diagnosticCollectionName: 'devreplay',
