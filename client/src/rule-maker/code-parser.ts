@@ -139,7 +139,7 @@ export async function strDiff2treeDiff(before: string, after: string, langName: 
 
 export async function makeParser(langName: string): Promise<any> {
 	const language = langName2Parser(langName);
-	const wasmPath = Path.join(__dirname, `/../../wasms/tree-sitter-${language}.wasm`);
+	const wasmPath = Path.join(`${__dirname}/../../wasms/tree-sitter-${language}.wasm`);
 
 	await Parser.init();
 	const lang = await Parser.Language.load(wasmPath);

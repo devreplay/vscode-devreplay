@@ -5,10 +5,10 @@
 
 const path = require('path');
 const merge = require('merge-options');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = function withDefaults(/**@type WebpackConfig*/extConfig) {
 
-	/** @type WebpackConfig */
 	let defaultConfig = {
 		mode: 'none', // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
 		target: 'node', // extensions run in a node context
@@ -37,6 +37,13 @@ module.exports = function withDefaults(/**@type WebpackConfig*/extConfig) {
 			{test: /\.json$/, exclude: /node_modules/, use: ['json-loader']},
 			]
 		},
+		plugins: [
+			new CopyPlugin({
+				patterns: [
+					path.resolve(__dirname, 'tree-sitter.wasm'),
+				],
+			}),
+		],
 		externals: {
 			'vscode': 'commonjs vscode', // ignored because it doesn't exist
 		},

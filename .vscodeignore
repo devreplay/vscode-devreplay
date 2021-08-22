@@ -11,6 +11,7 @@ contributing.md
 shared.webpack.config.js
 client/**
 !client/out/extension.js
+!client/out/tree-sitter.wasm
 server/**
 !server/out/server.js
 playgrounds/**

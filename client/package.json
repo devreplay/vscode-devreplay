@@ -23,7 +23,7 @@
 	"dependencies": {
 		"devreplay": "1.9.33",
 		"parse-diff": "^0.8.1",
-		"simple-git": "2.42.0",
+		"simple-git": "2.44.0",
 		"text-table": "0.2.0",
 		"vscode-languageclient": "7.0.0",
 		"web-tree-sitter": "0.19.4"
