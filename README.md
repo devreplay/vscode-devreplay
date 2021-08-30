@@ -100,6 +100,10 @@ the display messages can be custimized by editing `severity`, `author` and `mess
 * TypeScript
 * Plain Text
 
+## Contributing
+
+Please check [CONTRIBUTING.md](https://github.com/devreplay/vscode-devreplay/blob/master/CONTRIBUTING.md)
+
 ## Acknowledgements
 
 DevReplay is supported by 2019 Exploratory IT Human Resources Project [The MITOU Program](https://www.ipa.go.jp/jinzai/mitou/portal_index.html).
