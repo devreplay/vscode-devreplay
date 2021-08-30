@@ -24,7 +24,7 @@
 		"url": "https://github.com/devreplay/vscode-devreplay/issues"
 	},
 	"engines": {
-		"vscode": "^1.54.3"
+		"vscode": "^1.59.0"
 	},
 	"categories": [
 		"Other",
@@ -92,7 +92,7 @@
 	},
 	"devDependencies": {
 		"@types/mocha": "^9.0.0",
-		"@types/node": "^16.7.5",
+		"@types/node": "^16.7.6",
 		"@typescript-eslint/eslint-plugin": "^4.29.3",
 		"@typescript-eslint/parser": "^4.29.3",
 		"copy-webpack-plugin": "^9.0.1",
