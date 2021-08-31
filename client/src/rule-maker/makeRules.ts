@@ -22,8 +22,6 @@ export async function makeRulesFromDetailedDiffs(logs: DetailedDiff[]): Promise<
 		rules = rules.map(rule => {
 			rule.author = log.log.author_name;
 			rule.message = log.log.message;
-			rule.ruleId = log.log.hash;
-			delete rule.identifiers;
 			return rule;
 		});
 
@@ -44,7 +42,6 @@ export async function makeRulesFromDiffs(diffs: string[]): Promise<Rule[]> {
 		let rules = await makeRulesFromDiff(diff);
 		rules = rules
 			.map(rule => {
-				delete rule.identifiers;
 				return rule;
 			});
 

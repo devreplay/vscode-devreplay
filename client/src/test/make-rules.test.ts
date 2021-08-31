@@ -1,5 +1,5 @@
 import { makeRules } from '../rule-maker/makeRules';
-import { fixWithRules } from 'devreplay';
+import { fixWithRules, BaseRule2DevReplayRule } from 'devreplay';
 import * as assert from 'assert';
 
 test('Test rule maker', async () => {
@@ -13,9 +13,10 @@ test('Test rule maker', async () => {
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	assert.strictEqual(rule.before, beforeRegex);
-	assert.strictEqual(rule.after, afterRegex);
-	assert.strictEqual(fixWithRules(before, [rule]), after);
+	const rule2 = BaseRule2DevReplayRule(rule, 1);
+	assert.strictEqual(rule2.before, beforeRegex);
+	assert.strictEqual(rule2.after, afterRegex);
+	assert.strictEqual(fixWithRules(before, [rule2]), after);
 });
 
 test('Test rule maker2', async () => {
@@ -28,9 +29,10 @@ test('Test rule maker2', async () => {
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	assert.strictEqual(rule.before, beforeRegex);
-	assert.strictEqual(rule.after, afterRegex);
-	assert.strictEqual(fixWithRules(before, [rule]), after);
+	const rule2 = BaseRule2DevReplayRule(rule, 1);
+	assert.strictEqual(rule2.before, beforeRegex);
+	assert.strictEqual(rule2.after, afterRegex);
+	assert.strictEqual(fixWithRules(before, [rule2]), after);
 });
 
 test('Test rule maker3', async () => {
@@ -43,9 +45,10 @@ test('Test rule maker3', async () => {
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	assert.strictEqual(rule.before, beforeRegex);
-	assert.strictEqual(rule.after, afterRegex);
-	assert.strictEqual(fixWithRules(before, [rule]), after);
+	const rule2 = BaseRule2DevReplayRule(rule, 1);
+	assert.strictEqual(rule2.before, beforeRegex);
+	assert.strictEqual(rule2.after, afterRegex);
+	assert.strictEqual(fixWithRules(before, [rule2]), after);
 });
 
 test('Test rule maker4', async () => {
@@ -58,9 +61,10 @@ test('Test rule maker4', async () => {
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	assert.strictEqual(rule.before, beforeRegex);
-	assert.strictEqual(rule.after, afterRegex);
-	assert.strictEqual(fixWithRules(before, [rule]), after);
+	const rule2 = BaseRule2DevReplayRule(rule, 1);
+	assert.strictEqual(rule2.before, beforeRegex);
+	assert.strictEqual(rule2.after, afterRegex);
+	assert.strictEqual(fixWithRules(before, [rule2]), after);
 });
 
 test('Test Multiple tokens rule generate', async () => {
@@ -79,7 +83,8 @@ test('Test Multiple tokens rule generate', async () => {
 	if (rule === undefined) {
 		throw new Error('Rule can not be generated');
 	}
-	assert.deepStrictEqual(rule.before, beforeRegex);
-	assert.strictEqual(rule.after, afterRegex);
-	assert.strictEqual(fixWithRules(before, [rule]), after);
+	const rule2 = BaseRule2DevReplayRule(rule, 1);
+	assert.deepStrictEqual(rule2.before, beforeRegex);
+	assert.strictEqual(rule2.after, afterRegex);
+	assert.strictEqual(fixWithRules(before, [rule2]), after);
 });
