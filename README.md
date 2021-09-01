@@ -7,7 +7,7 @@ A Visual Studio Code extension with that will suggest source code fix based on y
 * [Command Line version](https://www.npmjs.com/package/devreplay)
 * [GitHub Application](https://github.com/marketplace/dev-replay)
 
-![howtouse](img/usage.gif)
+![howtouse](img/rulemake.gif)
 
 ## Quick start
 
@@ -69,25 +69,25 @@ it will be
 a, b = b, a
 ```
 
-the display messages can be custimized by editing `severity`, `author` and `message` like here
-![howtouse](img/DevReplayReplay.gif)
+the problem display can be custimized by editing `severity` like following.
+![howtouse](img/severity.gif)
 
 ```json
 [
-        {
-        "before": [
-        "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
-        "\\k<a>\\s*=\\s*(?<b>.+)",
-        "\\k<b>\\s*=\\s*\\k<tmp>"
-        ],
-        "after": [
-        "$2, $3 = $3, $2"
-        ],
-        "isRegex": true,
-        "severity": "Info",
-        "author": "Yuki",
-        "message": "Value exchanging can be one line"
-    },
+  {
+    "before": [
+      "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
+      "\\k<a>\\s*=\\s*(?<b>.+)",
+      "\\k<b>\\s*=\\s*\\k<tmp>"
+    ],
+    "after": [
+      "$2, $3 = $3, $2"
+    ],
+    "isRegex": true,
+    "severity": "Info",
+    "author": "Yuki",
+    "message": "Value exchanging can be one line"
+  },
 ]
 ```
 
