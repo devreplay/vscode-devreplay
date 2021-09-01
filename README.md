@@ -1,11 +1,6 @@
 # DevReplay for Visual Studio Code
 
-A Visual Studio Code extension with that will suggest source code fix based on your regular expressions.
-
-* [Other Editors Support (Language Server)](https://www.npmjs.com/package/devreplay-server)
-* [Atom (Progress)](https://atom.io/packages/atom-devreplay)
-* [Command Line version](https://www.npmjs.com/package/devreplay)
-* [GitHub Application](https://github.com/marketplace/dev-replay)
+Suggest source code fix based on your regular expressions.
 
 ![howtouse](img/rulemake.gif)
 
@@ -84,21 +79,18 @@ the problem display can be custimized by editing `severity` like following.
       "$2, $3 = $3, $2"
     ],
     "isRegex": true,
-    "severity": "Info",
+    "severity": "error",
     "author": "Yuki",
     "message": "Value exchanging can be one line"
   },
 ]
 ```
 
-## Supported Language
+## Other Implementation
 
-* C/CPP
-* Java
-* Python
-* JavsScript
-* TypeScript
-* Plain Text
+* [Language Server](https://www.npmjs.com/package/devreplay-server)
+* [NPM package](https://www.npmjs.com/package/devreplay)
+* [GitHub Application](https://github.com/marketplace/dev-replay)
 
 ## Contributing
 
