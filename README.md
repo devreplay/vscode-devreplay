@@ -90,7 +90,7 @@ the problem display can be custimized by editing `severity` like following.
 
 * [Language Server](https://www.npmjs.com/package/devreplay-server)
 * [NPM package](https://www.npmjs.com/package/devreplay)
-* [GitHub Application](https://github.com/marketplace/dev-replay)
+* [GitHub Actions](https://github.com/devreplay/devreplay#github-actions)
 
 ## Contributing
 
