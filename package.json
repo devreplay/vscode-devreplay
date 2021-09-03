@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "DevReplay",
 	"description": "Generate regular expressions and linting by rules",
-	"version": "1.7.1",
+	"version": "1.7.2",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
@@ -107,7 +107,7 @@
 		"rimraf": "^3.0.2",
 		"ts-loader": "^9.2.5",
 		"typescript": "^4.4.2",
-		"webpack": "^5.51.1",
+		"webpack": "^5.51.2",
 		"webpack-cli": "^4.8.0"
 	}
 }
