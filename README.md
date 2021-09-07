@@ -2,7 +2,7 @@
 
 Suggest source code fix based on your regular expressions.
 
-![howtouse](img/rulemake.gif)
+![howtouse](https://raw.githubusercontent.com/devreplay/vscode-devreplay/master/img/rulemake.gif)
 
 ## Quick start
 
@@ -65,7 +65,7 @@ a, b = b, a
 ```
 
 the problem display can be custimized by editing `severity` like following.
-![howtouse](img/severity.gif)
+![howtouse](https://raw.githubusercontent.com/devreplay/vscode-devreplay/master/img/severity.gif)
 
 ```json
 [
