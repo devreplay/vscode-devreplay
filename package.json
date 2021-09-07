@@ -84,8 +84,8 @@
 		"webpack:dev": "npm run clean && webpack --mode none --config ./client/webpack.config.js && webpack --mode none --config ./server/webpack.config.js",
 		"watch": "tsc -b -w",
 		"lint": "npm run lint:client && npm run lint:server",
-		"lint:client": "eslint --config ./client/.eslintrc.json ./client/src/*.ts",
-		"lint:server": "eslint --config ./server/.eslintrc.json ./server/src/*.ts",
+		"lint:client": "eslint --config ./.eslintrc.json ./client/src/*.ts",
+		"lint:server": "eslint --config ./.eslintrc.json ./server/src/*.ts",
 		"clean": "rimraf client/out && rimraf server/out",
 		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
 		"test": "sh ./scripts/e2e.sh"
