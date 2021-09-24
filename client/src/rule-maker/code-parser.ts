@@ -208,6 +208,10 @@ function langName2Parser(langName: string) {
 			return 'cpp';
 		case 'source.cpp':
 			return 'cpp';
+		case 'go':
+			return 'go';
+		case 'source.go':
+			return 'go';
 		case 'java':
 			return 'java';
 		case 'source.java':
@@ -220,6 +224,14 @@ function langName2Parser(langName: string) {
 			return 'python';
 		case 'source.python':
 			return 'python';
+		case 'ruby':
+			return 'ruby';
+		case 'source.ruby':
+			return 'ruby';
+		case 'rust':
+			return 'rust';
+		case 'source.rust':
+			return 'rust';
 		case 'typescript':
 			return 'typescript';
 		case 'source.ts':

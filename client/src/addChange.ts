@@ -55,7 +55,11 @@ function readCurrentPattern(rootPath: string): Rule[] {
 	if (fileContents === undefined) {
 		return [];
 	}
-	return JSON.parse(fileContents) as Rule[];
+	const rules = JSON.parse(fileContents) as Rule[] | Rule;
+	if (Array.isArray(rules)) {
+		return rules;
+	}
+	return [rules];
 }
 
 

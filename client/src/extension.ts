@@ -76,6 +76,10 @@ export function activate(context: ExtensionContext): void {
 			},
 			{
 				scheme: 'file',
+				language: 'ruby',
+			},
+			{
+				scheme: 'file',
 				language: 'rust',
 			},
 			{

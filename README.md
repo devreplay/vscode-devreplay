@@ -10,27 +10,23 @@ Suggest source code fix based on your regular expressions.
 1. Create your own programming pattern(`.devreplay.json`) on the root like bellow
 
 ```json
-[
-  {
-    "before": [
-      "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
-      "\\k<a>\\s*=\\s*(?<b>.+)",
-      "\\k<b>\\s*=\\s*\\k<tmp>"
-    ],
-    "after": [
-      "$2, $3 = $3, $2"
-    ],
-    "isRegex": true
-  }
-]
+{
+  "before": [
+    "(?<tmp>.+)\\s*=\\s*(?<a>.+)",
+    "\\k<a>\\s*=\\s*(?<b>.+)",
+    "\\k<b>\\s*=\\s*\\k<tmp>"
+  ],
+  "after": [
+    "$2, $3 = $3, $2"
+  ],
+  "isRegex": true
+}
 ```
 
 or You can chose the your programming language and framework.
 
 ```json
-[
-    "python"
-]
+"python"
 ```
 
 Following languages and Frameworks are supported.
