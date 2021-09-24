@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "DevReplay",
 	"description": "Generate regular expressions and linting by rules",
-	"version": "1.7.6",
+	"version": "1.7.7",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
@@ -109,5 +109,8 @@
 		"typescript": "^4.4.3",
 		"webpack": "^5.53.0",
 		"webpack-cli": "^4.8.0"
+	},
+	"dependencies": {
+		"vsce": "^1.100.0"
 	}
 }
