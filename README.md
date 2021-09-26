@@ -82,6 +82,11 @@ the problem display can be custimized by editing `severity` like following.
 ]
 ```
 
+## Configs
+
+* `devreplay.add.save`: Add rules when a file is saved (default: false)
+* `devreplay.rule.size`: Size of max change lines when making rules (default: 1)
+
 ## Other Implementation
 
 * [Language Server](https://www.npmjs.com/package/devreplay-server)
