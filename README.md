@@ -97,6 +97,12 @@ the problem display can be custimized by editing `severity` like following.
 
 Please check [CONTRIBUTING.md](https://github.com/devreplay/vscode-devreplay/blob/master/CONTRIBUTING.md)
 
+## TODO
+
+* [ ] Add support for other programming languages
+* [ ] Add support for other frameworks
+* [ ] Add support for regular expression generator using [Regexp preview](https://marketplace.visualstudio.com/items?itemName=LouisWT.regexp-preview)
+
 ## Acknowledgements
 
 DevReplay is supported by 2019 Exploratory IT Human Resources Project [The MITOU Program](https://www.ipa.go.jp/jinzai/mitou/portal_index.html).
