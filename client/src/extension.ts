@@ -110,7 +110,6 @@ export function activate(context: ExtensionContext): void {
 
 		return;
 	}
-	client.registerProposedFeatures();
 
 	// const config = workspace.getConfiguration('devreplay');
 
