@@ -17,15 +17,15 @@
 		"vscode": "^1.61.0"
 	},
 	"devDependencies": {
-		"@types/vscode": "1.61.0",
+		"@types/vscode": "1.66.0",
 		"vscode-test": "1.6.1"
 	},
 	"dependencies": {
-		"devreplay": "1.11.1",
-		"parse-diff": "^0.8.1",
-		"simple-git": "3.3.0",
+		"devreplay": "1.11.2",
+		"parse-diff": "^0.9.0",
+		"simple-git": "3.5.0",
 		"text-table": "0.2.0",
 		"vscode-languageclient": "8.0.0-next.4",
-		"web-tree-sitter": "0.19.4"
+		"web-tree-sitter": "0.20.5"
 	}
 }
