@@ -2,7 +2,7 @@
 	"name": "devreplay",
 	"displayName": "DevReplay",
 	"description": "Generate regular expressions and linting by rules",
-	"version": "1.7.11",
+	"version": "1.7.12",
 	"author": "Yuki Ueda",
 	"publisher": "Ikuyadeu",
 	"icon": "img/icon.png",
