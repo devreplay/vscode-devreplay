@@ -5,6 +5,8 @@ import { ExtensionContext, window, commands, workspace } from 'vscode';
 import { LanguageClient, LanguageClientOptions, RevealOutputChannelOn, ServerOptions, TransportKind } from 'vscode-languageclient/node';
 import { addChange } from './addChange';
 
+let client: LanguageClient;
+
 export function activate(context: ExtensionContext): void {
 	const serverModule = context.asAbsolutePath(join('server', 'out', 'server.js'));
 	const debugOptions = { execArgv: ['--nolazy', '--inspect=6009'], cwd: process.cwd() };
@@ -102,7 +104,6 @@ export function activate(context: ExtensionContext): void {
 		progressOnInitialization: true
 	};
 
-	let client: LanguageClient;
 	try {
 		client = new LanguageClient('DevReplay Server', serverOptions, clientOptions);
 	} catch (err) {
@@ -121,11 +122,11 @@ export function activate(context: ExtensionContext): void {
 	//     }
 	// });
 
-	context.subscriptions.push(
-		client.start(),
-		registeredCommand
-	);
+	client.start().catch((error) => client.error(`Starting the server failed.`, error, 'force'));
 }
 
-export function deactivate() {
+export async function deactivate() {
+	if (client) {
+		await client.stop();
+	}
 }
