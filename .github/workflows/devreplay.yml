@@ -1,0 +1,13 @@
+name: Devreplay
+on: [push, pull_request]
+jobs:
+  devreplay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "14.x"
+      - run: npm install -g devreplay
+      - name: Run devreplay
+        run: devreplay ./ .devreplay.json
